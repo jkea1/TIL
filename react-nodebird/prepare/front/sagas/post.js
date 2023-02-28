@@ -149,6 +149,7 @@ function* unfollow(action) {
       data: action.data,
     });
   } catch (err) {
+    console.log("😎");
     yield put({
       type: UNFOLLOW_FAILURE,
       data: err.response.data,
