@@ -1,11 +1,14 @@
-import React, { useCallback, useState} from 'react';
+import React, { useCallback, useState, useEffect} from 'react';
 import Head from 'next/head';
 import { Checkbox, Form, Input, Button} from 'antd';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import Router from 'next/router';
 
 import AppLayout from '../components/AppLayout';
 import useInput from '../hooks/useInput';
+import { SIGN_UP_REQUEST } from '../reducers/user';
+
 
 const ErrorMessage = styled.div`
   color: red;
@@ -13,7 +16,19 @@ const ErrorMessage = styled.div`
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const {signUpLoading} = useSelector((state) => state.user);
+  const {signUpLoading, signUpDone, signUpError} = useSelector((state) => state.user);
+  //회원가입 완료되면 mainpage로 돌아가게 만든다.
+  useEffect(() => {
+    if(signUpDone) {
+      Router.push('/');
+    };
+  }, [signUpDone]);
+
+  useEffect(() => {
+    if(signUpError) {
+      alert(signUpError);
+    }
+  }, [signUpError]);
 
   const [email, onChangeEmail] = useInput('');
   const [password,onChangepassword] = useInput('');
@@ -32,7 +47,7 @@ const Signup = () => {
   const onChangeTerm = useCallback((e) => {
     setTerm(e.target.checked);
     setTermError(false);
-  }, [])
+  }, []);
 
   const onSubmit = useCallback(() => {
     if(password !== passwordCheck) {
@@ -49,7 +64,7 @@ const Signup = () => {
     dispatch({
       type: SIGN_UP_REQUEST,
       data: {email, password, nickname},
-    })
+    });
 
   }, [email, password, passwordCheck, term]); //나중에 이걸 서버에 보내주면 된다. 
 

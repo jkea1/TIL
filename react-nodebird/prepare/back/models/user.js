@@ -1,7 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
+  //하나하나가 각각 컬럼이다. 
+  //엑셀의 세로줄에 해당한다. 
+  //id가 기본적으로 들어있다. 
   const User = sequelize.define('User', { //User가 자동으로 Mysql에 소문자 users로 저장된다.  
-    //하나하나가 각각 컬럼이다. 엑셀의 세로줄에 해당한다. 
-    //id가 기본적으로 들어있다. 
     email: {
       type: DataTypes.STRING(30), //db에서도 검사를 해준다. / STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
       allowNull: false, //필수

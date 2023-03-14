@@ -6,8 +6,8 @@ import {
   SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
   } from '../reducers/user';
 
-function loginAPI(data) {
-  return axios.post('/api/login', data);
+function logInAPI(data) {
+  return axios.post('/user/login', data);
 }
 
 //요청이 실패할 것을 대비해서 try, catch로 감싸줘야 한다. 
@@ -18,12 +18,10 @@ function loginAPI(data) {
 function* logIn(action) {
   try {
     //서버가 아직 안 만들어진거다. 
-    //const result = yield call(logOutAPI);
-    console.log("login saga 확인", action.data);
-    yield delay(1000);
+    const result = yield call(logInAPI, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     yield put({
@@ -35,7 +33,7 @@ function* logIn(action) {
 
 //LogOut
 function logOutAPI() {
-  return axios.post('/api/logOut');
+  return axios.post('/user/logOut');
 }
 
 function* logOut() {
@@ -54,18 +52,18 @@ function* logOut() {
 }
 
 //SignUp
-function signUpAPI() {
-  return axios.post('/api/signUp');
+function signUpAPI(data) {
+  return axios.post('/user', data); //data는 서버로 req.body로 넘어간다.  
 }
 
-function* signUp() {
+function* signUp(action) {
   try {
-    //const result = yield call(signUpAPI)
-    yield delay(1000);
+    const result = yield call(signUpAPI, action.data);
     yield put({
       type: SIGN_UP_SUCCESS,
     });
   } catch (err) {
+    console.log("signUp error", err);
     yield put({
       type: SIGN_UP_FAILURE,
       error: err.response.data,
