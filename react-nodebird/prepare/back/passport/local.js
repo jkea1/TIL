@@ -18,7 +18,7 @@ module.exports = () => {
       });
       if(!user) {
         //순서가 중요하다. (서버 에러, 성공, 클라이언트 에러)
-        return done(null, false, { reason: '존재하지 않는 사용자입니다!'});
+        return done(null, false, { reason: '존재하지 않는 이메일입니다!'});
       }
       //compare도 비동기 함수라서 await 붙여줘야 한다. 
       const result = await bcrypt.compare(password, user.password);

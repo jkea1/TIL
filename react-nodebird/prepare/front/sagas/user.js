@@ -6,15 +6,18 @@ import {
   SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAILURE,
   } from '../reducers/user';
 
-function logInAPI(data) {
-  return axios.post('/user/login', data);
-}
-
 //요청이 실패할 것을 대비해서 try, catch로 감싸줘야 한다. 
 //yield call해서 loginAPI를 실행한고 return 값을 result로 받는다. 
 //yield put은 action을 dispatch 하는 기능을 한다. 
 
 //LogIn
+function logInAPI(data) {
+  console.error("logInAPI error 확인");
+  return axios.post('/user/login', data, {
+    withCredential: true,
+  });
+}
+
 function* logIn(action) {
   try {
     //서버가 아직 안 만들어진거다. 
@@ -24,6 +27,7 @@ function* logIn(action) {
       data: result.data,
     });
   } catch (err) {
+    console.error("login err", err);
     yield put({
       type: LOG_IN_FAILURE,
       error: err.response.data,
@@ -78,6 +82,7 @@ function* signUp(action) {
 
 //eventListener 같은 역할을 한다. 
 function* watchLogIn() {
+  console.log("watchlogin 😎");
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
 

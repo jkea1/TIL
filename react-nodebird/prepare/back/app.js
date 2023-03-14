@@ -31,7 +31,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));  
-app.use(cookieParser('nodebirdsecret'));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
   saveUninitialized : false,
   resave : false, 
