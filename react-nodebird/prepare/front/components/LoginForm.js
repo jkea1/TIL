@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -18,9 +18,15 @@ const FormWrapper = styled(Form)`
 //setIsLoggedIn은 더미데이터로 AppLayout에서 넘겨 받음
 const LoginForm = () => {
   const dispatch = useDispatch()
-  const {logInLoading} = useSelector((state) => state.user);
+  const { logInLoading, logInError } = useSelector((state) => state.user);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
+
+  useEffect(() => {
+    if(logInError) {
+      alert(logInError);
+    }
+  }, [logInError]);
   
   //로그인을 하는 순간 setIsLoggedIn(true)로 인해 
   //isLoggedIn 이 true로 바뀌고 -> <UserProfile /> 로 바뀐다. 
