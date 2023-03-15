@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 //2. email 존재하면 비밀번호 비교해서 일치하면 done으로 user 정보 보내준다. 2-1 비밀번호 일치 안하면 비밀번호 틀렸습니다 라고 보내준다. 
 module.exports = () => {
   passport.use(new LocalStrategy({
-    usernameFeild: 'email',
+    usernameField: 'email',
     passwordField: 'password',
   }, async (email, password, done) => {
     try {

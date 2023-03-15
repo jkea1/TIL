@@ -12,10 +12,7 @@ import {
 
 //LogIn
 function logInAPI(data) {
-  console.error("logInAPI error 확인");
-  return axios.post('/user/login', data, {
-    withCredential: true,
-  });
+  return axios.post('/user/login', data);
 }
 
 function* logIn(action) {

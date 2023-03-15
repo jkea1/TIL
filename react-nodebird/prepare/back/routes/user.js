@@ -7,6 +7,7 @@ const { User } = require('../models');
 const router = express.Router();
 
 //local에서의 로그인 전략이 실행된다.
+//local에서 성공을 return 했다면 if문 아래가 실행되어 에러를 확인한다.  
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     //서버에러
