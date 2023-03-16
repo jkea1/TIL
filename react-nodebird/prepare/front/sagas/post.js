@@ -12,23 +12,19 @@ import { throttle } from 'redux-saga/effects';
 
 //addPost
 function addPostAPI(data) {
-  return axios.post('/post', data);
+  return axios.post('/post', { content: data });
 }
 
 function* addPost(action) {
   try {
-    const result = yield call(addPostAPI, action.data)
-    const id = shortId.generate();
+    const result = yield call(addPostAPI, action.data);
     yield put({
       type: ADD_POST_SUCCESS,
-      data: {
-        id, //id: id 와 같은 표현이다. 
-        content : action.data, //addPost로 받은 게시글 data를 리듀서의 'ADD_POST_SUCCESS'로 넘겨준다. 
-      },
+      data: result.data,
     });
     yield put({
       type: ADD_POST_TO_ME,
-      data: id, 
+      data: result.data.id, 
     });
   } catch (err) {
     console.log("에러확인",err)
@@ -68,17 +64,15 @@ function* removePost(action) {
 
 //AddComment
 function addCommentAPI(data) {
-  return axios.post(`/api/post/${data.postId}/comment`, data);
+  return axios.post(`/post/${data.postId}/comment`, data); //POST /post/1/comment
 }
 
 function* addComment(action) {
-  console.log("addComment_saga_확인");
   try {
-    //const result = yield call(addPostAPI, action.data)
-    yield delay(1000);
+    const result = yield call(addPostAPI, action.data)
     yield put({
       type: ADD_COMMENT_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (err) {
     console.log("addComment error", err);

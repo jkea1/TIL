@@ -75,7 +75,7 @@ export const addComment = (data) => ({
   data, //쓴 글을 받아서 보내준다. 
 });
 
-const dummyPost = (data) => ({
+/* const dummyPost = (data) => ({
   id : data.id,
   content: data.content,
   User: {
@@ -84,16 +84,16 @@ const dummyPost = (data) => ({
   },
   Images: [],
   Comments: [],
-});
+}); */
 
-const dummyComment = (data) => ({
+/* const dummyComment = (data) => ({
   id : shortId.generate(),
   content: data,
   User: {
     id: 1, 
     nickname: '제로초',
   },
-})
+}) */
 
 const reducer = (state = initialState, action) => {
   return produce(state, (draft) => {
@@ -125,7 +125,7 @@ const reducer = (state = initialState, action) => {
       case ADD_POST_SUCCESS : 
         draft.addPostLoading = false;
         draft.addPostDone = true;
-        draft.mainPosts.unshift(dummyPost(action.data)); //mainPost가 앞에 들어가야 한다. 그래야 새로운 글이 위에 올라간다. 
+        draft.mainPosts.unshift(action.data); //mainPost가 앞에 들어가야 한다. 그래야 새로운 글이 위에 올라간다. 
         break;
       case ADD_POST_FAILURE : 
         draft.addPostLoading = false;
@@ -156,8 +156,8 @@ const reducer = (state = initialState, action) => {
         draft.addCommentError = null; //null 아니라 false도 된다.   
         break;
       case ADD_COMMENT_SUCCESS : {
-        const post = draft.mainPosts.find((v) => v.id === action.data.postId);
-        post.Comments.unshift(dummyComment(action.data.content));
+        const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+        post.Comments.unshift(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         break;
