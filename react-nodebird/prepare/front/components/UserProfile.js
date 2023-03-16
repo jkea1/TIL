@@ -9,7 +9,7 @@ const UserProfile = () => {
   const { me ,logOutLoading} = useSelector( (state) => state.user ); //이거 state.user에 {} 안해도 되나?
 
   const onLogOut = useCallback(() => {
-    dispatch(logoutRequestAction())
+    dispatch(logoutRequestAction());
   }, []);
 
   return (

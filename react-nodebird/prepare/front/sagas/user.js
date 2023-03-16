@@ -28,22 +28,23 @@ function* logIn(action) {
     yield put({
       type: LOG_IN_FAILURE,
       error: err.response.data,
-    })
+    });
   }
 }
 
 //LogOut
 function logOutAPI() {
-  return axios.post('/user/logOut');
+  return axios.post('/user/logout');
 }
 
 function* logOut() {
   try {
-    yield call(logOutAPI)
+    yield call(logOutAPI);
     yield put({
       type: LOG_OUT_SUCCESS,
     });
   } catch (err) {
+    console.error("saga logout err", err);
     yield put({
       type: LOG_OUT_FAILURE,
       error: err.response.data,

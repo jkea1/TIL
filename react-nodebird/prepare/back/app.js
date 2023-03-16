@@ -12,6 +12,9 @@ const passportConfig = require('./passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+//app.js 그리고 router안에 들어가는 건 middleware들이다. 
+//(req, res, next) 구조를 갖는다. 외우자.
+
 dotenv.config();
 //express를 한번 호출해줘야 한다. 
 const app = express();
@@ -75,6 +78,12 @@ app.delete('/post', (req, res) => {
 //중복되는 url은 앞으로 뽑아준다. /post 가 접두사처럼 붙게 된다. 
 app.use('/post', postRouter);
 app.use('/user', userRouter);
+
+//에러처리 middleware
+//원래 내장 되어 있어서 안해도 되지만 에러처리 페이지를 띄워주고 싶다는 등 특별하게 에러처리를 하고 싶은 경우에는 에러처리 미들웨어를 추가한다. 
+/* app.use((err, req, res, next) => {
+
+}); */
 
 //백엔드 서버는 3065이다. 
 app.listen(3065, () => {

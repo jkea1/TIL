@@ -3,13 +3,15 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 
 const { User, Post } = require('../models');
-const db = require('../models');
+const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
 
 //local에서의 로그인 전략이 실행된다.
 //local에서 성공을 return 했다면 if문 아래가 실행되어 에러를 확인한다.  
-router.post('/login', (req, res, next) => {
+
+//로그인
+router.post('/login', isNotLoggedIn, (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     //서버에러
     if(err) {
@@ -49,7 +51,8 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });  
 
-router.post('/', async (req, res, next) => { // POST /user/
+//회원가입
+router.post('/', isNotLoggedIn, async (req, res, next) => { // POST /user/
   try {
     const exUser = await User.findOne({
       //조건을 넣어줘야 한다. 
@@ -76,7 +79,9 @@ router.post('/', async (req, res, next) => { // POST /user/
 
 //login 성공 후 부터는 req.user에 정보가 들어가 있다. 
 //logout은 세션과 쿠키만 지워주면 된다. 
-router.post('/user/logout', (req, res) => {
+//logOut
+router.post('/logout', isLoggedIn, (req, res) => {
+  console.log("😎", req);
   req.logout();
   req.session.destroy();
   res.send('ok');

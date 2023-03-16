@@ -24,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     db.User.hasMany(db.Post);
     db.User.hasMany(db.Comment);
     db.User.belongsToMany(db.Post, {through: 'Like', as: 'Liked'}); //as로 별칭을 붙여주면 좋다. 
-    db.User.belongsToMany(db.User, {through: 'Follow', as: "Followers", foreignKey: 'followingId'});
-    db.User.belongsToMany(db.User, {through: 'Follow', as: "Followings", foreignKey: 'followerId'});
+    db.User.belongsToMany(db.User, {through: 'Follow', as: "Followers", foreignKey: 'FollowingId'});
+    db.User.belongsToMany(db.User, {through: 'Follow', as: "Followings", foreignKey: 'FollowerId'});
   };
   return User;
 } 
