@@ -29,7 +29,8 @@ db.sequelize.sync()
 
 //아래 router들 보다 위에 적어줘야 한다. 
 app.use(cors({
-  origin: "*", 
+  origin: "http://localhost:3060", //주소 대신 true 해도 된다. 
+  credentials: true,
 }));
 
 app.use(express.json());

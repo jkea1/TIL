@@ -6,6 +6,20 @@ const { User, Post } = require('../models');
 const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
+router.get('/', async(req, res, next) => { //GET /user
+  try {
+    if(req.user) {
+      const user = await User.findOne({
+        where: { id: req.user.id }
+      });
+      res.status(200).json(user);
+    } else {
+      res.status(200).json(null); //로그인 안할 시 아무것도 안보내 줌
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 //local에서의 로그인 전략이 실행된다.
 //local에서 성공을 return 했다면 if문 아래가 실행되어 에러를 확인한다.  

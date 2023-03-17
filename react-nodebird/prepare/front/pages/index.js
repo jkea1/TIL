@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
 import { LOAD_POSTS_REQUEST } from '../reducers/post';
-
+import {LOAD_MY_INFO_REQUEST} from '../reducers/user';
 
 //<AppLayout>으로 감싸진 애들이 children이 된다. 
 //의미있는 단위로 컴포넌트를 나눠주면 된다. 
@@ -14,11 +14,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const {me} = useSelector((state) => state.user);
   const {mainPosts, hasMorePosts, loadPostsLoading} = useSelector((state) => state.post);
-
+  
   //main page 불러올때 LOAD_POSTS_REQUEST 가 호출된다. 
   //빈 배열만 넣는다면 componentdidmount 효과를 낼 수 있다. 
   //로딩을 초기에만 1번한다. 
   useEffect(() => {
+    dispatch({
+      type: LOAD_MY_INFO_REQUEST,
+    });
     dispatch({
       type: LOAD_POSTS_REQUEST,
     });

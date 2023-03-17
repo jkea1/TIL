@@ -1,6 +1,9 @@
 import produce from 'immer';
 
 export const initialState = {
+  loadUserLoading: false, //유저 정보 가져오기 시도중
+  loadUserDone: false,
+  loadUserError: null, 
   followLoading: false, //팔로우 시도중
   followDone: false,
   followError: null, 
@@ -48,6 +51,11 @@ export const FOLLOW_FAILURE = 'FOLLOW_FAILURE';
 export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST';
 export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
 export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
+
+export const LOAD_MY_INFO_REQUEST = 'LOAD_MY_INFO_REQUEST';
+export const LOAD_MY_INFO_SUCCESS = 'LOAD_MY_INFO_SUCCESS';
+export const LOAD_MY_INFO_FAILURE = 'LOAD_MY_INFO_FAILURE';
+
 
 //user reducer 상태를 바꿀 수 있는 action 
 //reducer를 바꾸기 위해서는 action을 줘야 한다. 
@@ -197,7 +205,7 @@ const reducer = (state = initialState, action) => {
           draft.unfollowLoading = true;
           draft.unfollowError = null; //로딩할때는 error는 없애준다. 
           draft.unfollowDone = false;
-        break;
+          break;
         case UNFOLLOW_SUCCESS : 
           draft.unfollowLoading =  false;
           draft.unfollowDone = true;
@@ -206,6 +214,22 @@ const reducer = (state = initialState, action) => {
         case UNFOLLOW_FAILURE : 
           draft.unfollowLoading = false;
           draft.unfollowError = action.error;
+          break;
+        
+          //load user info
+        case LOAD_MY_INFO_REQUEST : 
+          draft.loadUserLoading = true;
+          draft.loadUserError = null; //로딩할때는 error는 없애준다. 
+          draft.loadUserDone = false;
+          break;
+        case LOAD_MY_INFO_SUCCESS : 
+          draft.loadUserLoading =  false;
+          draft.loadUserDone = true;
+          draft.me = action.data;
+          break;
+        case LOAD_MY_INFO_FAILURE : 
+          draft.loadUserLoading = false;
+          draft.loadUserError = action.error;
           break;
   
       default:
