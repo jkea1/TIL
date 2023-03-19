@@ -77,7 +77,7 @@ function* signUp(action) {
 
 //Load my info
 function loadUserAPI() {
-  return axios.post('/user');  
+  return axios.get('/user');  
 }
 
 function* loadUser(action) {
@@ -88,7 +88,6 @@ function* loadUser(action) {
       data: result.data,
     });
   } catch (err) {
-    console.log("signUp error", err);
     yield put({
       type: LOAD_MY_INFO_FAILURE,
       error: err.response.data,
@@ -115,18 +114,18 @@ function* watchSignUP() {
   yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
-function* watchLoadUser() {
-  yield takeLatest(LOAD_MY_INFO_REQUEST, loadUser);
-}
-
-/* function* watchFollow() {
+function* watchFollow() {
   yield takeLatest(FOLLOW_REQUEST, follow);
 }
 
 function* watchUnfollow() {
   yield takeLatest(UNFOLLOW_SUCCESS, unfollow);
 }
- */
+
+function* watchLoadUser() {
+  yield takeLatest(LOAD_MY_INFO_REQUEST, loadUser);
+}
+
 
 
 export default function* userSaga() {

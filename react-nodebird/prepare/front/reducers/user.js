@@ -207,7 +207,7 @@ const reducer = (state = initialState, action) => {
           draft.unfollowDone = false;
           break;
         case UNFOLLOW_SUCCESS : 
-          draft.unfollowLoading =  false;
+          draft.unfollowLoading = false;
           draft.unfollowDone = true;
           draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data); //action.data id인 사람만 빠지게 된다. 
           break;
@@ -216,7 +216,7 @@ const reducer = (state = initialState, action) => {
           draft.unfollowError = action.error;
           break;
         
-          //load user info
+        //load user info
         case LOAD_MY_INFO_REQUEST : 
           draft.loadUserLoading = true;
           draft.loadUserError = null; //로딩할때는 error는 없애준다. 

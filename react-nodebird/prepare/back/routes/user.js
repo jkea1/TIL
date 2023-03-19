@@ -6,18 +6,35 @@ const { User, Post } = require('../models');
 const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
+
 router.get('/', async(req, res, next) => { //GET /user
   try {
     if(req.user) {
-      const user = await User.findOne({
-        where: { id: req.user.id }
-      });
-      res.status(200).json(user);
+      const fullUserWithoutPassword = await User.findOne({
+        where: { id: req.user.id },
+        attributes: {
+          exclude: ['password']
+        },
+        include: [{
+          model: Post,
+          attributes:['id'], //게시글의 length만 알면 되므로 데이터 문제를 해결하기 위해 id만 가져와도 된다. 
+        }, {
+          model: User, 
+          as: 'Followings',
+          attributes:['id'],
+        }, {
+          model: User, 
+          as: 'Followers',
+          attributes:['id'],
+        }]
+      })
+      res.status(200).json(fullUserWithoutPassword);
     } else {
       res.status(200).json(null); //로그인 안할 시 아무것도 안보내 줌
     }
   } catch (error) {
     console.error(error);
+    next(error);
   }
 });
 
@@ -50,12 +67,15 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         },
         include: [{
           model: Post,
+          attributes:['id'],
         }, {
           model: User, 
           as: 'Followings',
+          attributes:['id'],
         }, {
           model: User, 
           as: 'Followers',
+          attributes:['id'],
         }]
       })
     //res.setHeader('Cookie', 'cxlhy')
