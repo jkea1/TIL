@@ -1,6 +1,8 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
@@ -29,6 +31,6 @@ app.post('/api/todo', (req, res) => {
   return res.send('success');
 });
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   console.log('server start!');
 })
