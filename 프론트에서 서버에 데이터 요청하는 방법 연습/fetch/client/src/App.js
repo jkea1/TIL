@@ -1,23 +1,32 @@
-import { useEffect, useState } from 'react';
-
 //fetch : 기본으로 제공하는 라이브러리
 //axios 
 
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const SERVER_URL = 'http://localhost:4000/api/todo';
 function App() {
   const [todoList, setTodoList] = useState([]);
 
-  const fetchData = () => {
-    fetch('http://localhost:4000/api/todo')
+  //axios/(async+await)을 사용하면 axios/then을 사용 하지 않고 return 값을 받아서 처리 할 수 있다. 
+  const fetchData = async () => {
+    const response = await axios.get(SERVER_URL);
+    setTodoList(response.data);
+    
+    /* fetch('http://localhost:4000/api/todo')
       .then((response) => response.json()) //json으로 한번 정제해 줘야 한다. 
-      .then((data) => setTodoList(data));
+      .then((data) => setTodoList(data)); */
   }
   //처음 렌더링 했을때 더미 데이터로 보여준다. 
   useEffect(() => {fetchData()}, []);
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async(e) => {
     const text = e.target.text.value;
     const done = e.target.done.checked;
-    fetch('http://localhost:4000/api/todo', {
+    //axios post의 첫번째 인자는 서버 url, 두번째 인자에는 넣고 싶은 데이터를 넣는다. 
+    await axios.post(SERVER_URL, { text, done }); //서버에 추가된 data를 보내준다. 
+    fetchData(); //서버에 저장된 추가된 데이터를 불러온다. (get)
+    /* fetch('http://localhost:4000/api/todo', {
       method: 'POST',
       headers: {
         'Content-Type' : 'application/json' 
@@ -26,7 +35,7 @@ function App() {
         text, 
         done,
       }),
-    }).then(() => fetchData());
+    }).then(() => fetchData()); */
   };
 
   return (
