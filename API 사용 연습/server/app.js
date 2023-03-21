@@ -27,6 +27,15 @@ app.get('/database/:id', (req, res) => {
   res.send(data);
 })
 
+//REST API
+//생성 : POST
+//수정 : PUT, PATCH
+//삭제 : DELETE
+
+//http method를 활용하면 
+//표현력을 높이고 구조적인 코드를 짤 수 있다. 
+//URL 주소는 동일하게 하고 method만 다르게 한다.  
+
 //데이터를 가져오는 방법 1 : params 이용하기 
 /* app.post('/database/:title', function (req, res) {
   const title = req.params.title;
@@ -39,7 +48,8 @@ app.get('/database/:id', (req, res) => {
 }) */
 
 //데이터를 가져오는 방법 2 : req.body 이용하기 
-app.post('/add-database', (req, res) => {
+//글 추가하기 
+app.post('/database', (req, res) => {
   const title = req.body.title;
   database.push({
     id:database.length +1,
@@ -49,7 +59,7 @@ app.post('/add-database', (req, res) => {
 });
 
 //데이터 수정하는 방법
-app.post('/update-database', (req, res) => {
+app.put('/database', (req, res) => {
   const id = req.body.id;
   const title = req.body.title;
   database[id-1].title = title;
@@ -57,9 +67,9 @@ app.post('/update-database', (req, res) => {
 });
 
 //데이터 삭제하는 법
-app.post('/delete-database', (req, res) => {
+app.delete('/database', (req, res) => {
   const id = req.body.id;
-  database.splice(id-1, 1);
+  database.splice(id - 1, 1);
   res.send('값 삭제가 정상적으로 완료되었습니다.');
 });
 
