@@ -21,8 +21,10 @@ app.get('/api/todo', (req, res) => {
 })
 
 //todo 게시물 추가 
+//front에서 post 요청을 하면 app.post가 실행된다. 
 app.post('/api/todo', (req, res) => {
   const { text, done } = req.body; //client에서 body에 data를 담아 보낸다. 
+  console.log('req.body : ', req.body);
   todoList.push({
     id: id++,
     text, 

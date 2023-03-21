@@ -6,17 +6,39 @@ import { useEffect, useState } from 'react';
 function App() {
   const [todoList, setTodoList] = useState([]);
 
-  useEffect(() => {
+  const fetchData = () => {
     fetch('http://localhost:4000/api/todo')
       .then((response) => response.json()) //json으로 한번 정제해 줘야 한다. 
       .then((data) => setTodoList(data));
-  }, []);
+  }
+  //처음 렌더링 했을때 더미 데이터로 보여준다. 
+  useEffect(() => {fetchData()}, []);
+
+  const onSubmitHandler = (e) => {
+    const text = e.target.text.value;
+    const done = e.target.done.checked;
+    fetch('http://localhost:4000/api/todo', {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json' 
+      },
+      body: JSON.stringify({
+        text, 
+        done,
+      }),
+    }).then(() => fetchData());
+  };
 
   return (
     <div className="App">
       <h1>TODO LIST</h1>
-      {todoList.map((todo) => (
-        <div key={todo.id}>
+      <form onSubmit={onSubmitHandler}>
+        <input name="text" />
+        <input name="done" type="checkbox" />
+        <input type="submit" value="todo 추가"/>
+      </form>
+      {todoList?.map((todo) => (
+        <div key={todo.id} style={{display: 'flex'}}>
           <div>{todo.id}</div>
           <div>{todo.text}</div>
           <div>{todo.done ? 'done' : 'doing'}</div>
