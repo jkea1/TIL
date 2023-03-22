@@ -1,4 +1,5 @@
 const express = require('express');
+const argon2 = require('argon2');
 const app = express();
 
 const database = [{id: 1, username: 'abc', password: 'abc'}];
@@ -14,11 +15,15 @@ app.get('/users', (req, res) => {
   res.send(database);
 })
 
-app.post('/signup', (req, res) => {
+//암호는 암호화 해줘야 한다. 
+//argon2.hash("password")해서 암호화 해줘야 한다.  
+app.post('/signup', async (req, res) => {
   const {username, password, age, birthday} = req.body;
+  const hash = await argon2.hash(password);
+
   database.push({
     username, 
-    password,
+    password: hash,
     age,
     birthday,
   });
