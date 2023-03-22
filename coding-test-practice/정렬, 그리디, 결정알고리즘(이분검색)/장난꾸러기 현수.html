@@ -1,3 +1,4 @@
+원래 arr와 sortArr를 비교해서 두 개를 찾는다. 
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,11 +7,13 @@
     <body>
         <script>
             function solution(arr){
-                let answer=[];
-                let sortArr=arr.slice();
-                sortArr.sort((a, b)=>a-b);
-                for(let i=0; i<arr.length; i++){
-                    if(arr[i]!==sortArr[i]) answer.push(i+1);
+                let answer = [];
+                let sortArr = arr.slice();
+                sortArr.sort((a, b) => a-b);
+                for(let i=0; i < arr.length; i++) {
+                  if(arr[i] !== sortArr[i]) {
+                    answer.push(i+1);
+                  }
                 }
                 return answer;
             }
