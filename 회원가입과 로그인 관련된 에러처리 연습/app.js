@@ -13,7 +13,11 @@ app.get('/test', (req,res) => {
 
 app.get('/users', (req, res) => {
   res.send(database);
-})
+});
+
+app.get('secure_data', (res, req) => {
+  res.send('인증된 사용자만 쓸 수 있는 API');
+});
 
 //암호는 암호화 해줘야 한다. 
 //argon2.hash("password")해서 암호화 해줘야 한다.  
