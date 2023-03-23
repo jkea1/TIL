@@ -38,11 +38,11 @@ app.post('/login', async (req, res) => {
     return user.username === username; //username이 같은 user을 찾아서 return 한다.  
   });
   if(user.length === 0) {
-    res.send('해당하는 id가 없습니다.');
+    res.status(403).send('해당하는 id가 없습니다.'); //forbidden, 4xx : 클라이언트의 잘못이다.
     return; //끝내버린다. 
   }
   if (!(await argon2.verify(user[0].password, password))) {
-    res.send('패스워드가 틀립니다.');
+    res.status(403).send('패스워드가 틀립니다.');
     return;
   }
 
