@@ -5,7 +5,7 @@ import {
   ADD_POST_REQUEST, ADD_POST_SUCCESS, ADD_POST_FAILURE,
   ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE, 
   REMOVE_POST_REQUEST,REMOVE_POST_SUCCESS,REMOVE_POST_FAILURE,
-  LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS,  LOAD_POSTS_FAILURE, generateDummyPost,
+  LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS,  LOAD_POSTS_FAILURE,
   } from '../reducers/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME, FOLLOW_REQUEST,FOLLOW_SUCCESS ,FOLLOW_FAILURE, UNFOLLOW_REQUEST, UNFOLLOW_SUCCESS ,UNFOLLOW_FAILURE } from '../reducers/user';
 import { throttle } from 'redux-saga/effects';
@@ -27,7 +27,7 @@ function* addPost(action) {
       data: result.data.id, 
     });
   } catch (err) {
-    console.log("에러확인",err)
+    console.error("에러확인",err)
     yield put({
       type: ADD_POST_FAILURE,
       data: err.response.data,
@@ -75,7 +75,7 @@ function* addComment(action) {
       data: result.data,
     });
   } catch (err) {
-    console.log("addComment error", err);
+    console.error(err);
     yield put({
       type: ADD_COMMENT_FAILURE,
       data: err.response.data,
@@ -85,17 +85,16 @@ function* addComment(action) {
 
 //loadPosts
 function loadPostsAPI(data) {
-  return axios.get('/api/posts', data);
+  return axios.get('/posts', data);
 }
 
 function* loadPosts(action) {
   try {
-    //const result = yield call(loadPoststAPI, action.data)
-    yield delay(1000);
+    const result = yield call(loadPostsAPI, action.data);
     //load post 성공하면 데이터 10개를 가짜로 만들어 준다. 
     yield put({
       type: LOAD_POSTS_SUCCESS,
-      data: generateDummyPost(10), //reducer의 action.data로 들어가서 원래 mainPosts와 합쳐진다. 
+      data: result.data, //reducer의 action.data로 들어가서 원래 mainPosts와 합쳐진다. 
     });
   } catch (err) {
     console.log("loadPosts saga err 확인", err);

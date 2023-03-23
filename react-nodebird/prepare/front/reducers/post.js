@@ -25,7 +25,7 @@ export const initialState = {
 
 //서버에서 정보를 불러오는 것을 아래로 대체 한다. 
 //말 그대로 dummydata를 만들어 주는 함수이다. 
-export const generateDummyPost = (number) => Array(number).fill().map(() => ({
+/* export const generateDummyPost = (number) => Array(number).fill().map(() => ({
   id: shortId.generate(),
   User: {
     id: shortId.generate(),
@@ -42,7 +42,7 @@ export const generateDummyPost = (number) => Array(number).fill().map(() => ({
     },
     content: faker.lorem.sentence(),
   }],
-}));
+})); */
 
 /* initialState.mainPosts = initialState.mainPosts.concat(); */
 

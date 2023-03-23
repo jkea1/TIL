@@ -2,11 +2,13 @@ const express = require('express');
 const cors = require('cors');
 
 const postRouter = require('./routes/post');
+const postsRouter = require('./routes/posts');
 const userRouter = require('./routes/user');
 const db = require('./models');
 const process = require('process');
 const passport = require('passport');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 
 const passportConfig = require('./passport');
 const session = require('express-session');
@@ -26,6 +28,7 @@ db.sequelize.sync()
   })
   .catch(console.error);
 
+app.use(morgan('dev'));
 
 //아래 router들 보다 위에 적어줘야 한다. 
 app.use(cors({
@@ -60,21 +63,7 @@ app.get('/', (req, res) => {
 });
 
 //보통 api들은 json으로 응답한다. 
-app.get('/posts', (req, res) => {
-  res.json([
-    {id: 1, content: 'hello1'},
-    {id: 2, content: 'hello2'},
-    {id: 3, content: 'hello3'},
-  ]);
-});
-
-app.post('/post', (req, res) => {
-  res.json({id: 1, content: 'hello1'});
-});
-
-app.delete('/post', (req, res) => {
-  res.json({id: 1, content: 'hello1'});
-});
+app.use('/posts', postsRouter);
 
 //중복되는 url은 앞으로 뽑아준다. /post 가 접두사처럼 붙게 된다. 
 app.use('/post', postRouter);
