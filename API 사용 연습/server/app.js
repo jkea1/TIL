@@ -67,8 +67,8 @@ app.put('/database', (req, res) => {
 });
 
 //데이터 삭제하는 법
-app.delete('/database', (req, res) => {
-  const id = req.body.id;
+app.delete('/database/:id', (req, res) => {
+  const id = req.params.id; //delete method 같은 경우에는 req.body로 데이터를 전송하지 못하는 경우가 있기 때문에 url parameter로 전달한다. 
   database.splice(id - 1, 1);
   res.send('값 삭제가 정상적으로 완료되었습니다.');
 });
