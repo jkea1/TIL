@@ -1,14 +1,22 @@
 const express = require('express');
 const app = express();
+const mysql = require('mysql2');
 
-app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+// create the connection to database
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  database: 'test'
+});
 
 const database = [
   {id: 1, title: '글1'},
   {id: 2, title: '글2'},
   {id: 3, title: '글3'},
 ];
+
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 //http://localhost:3000
 //index.html 파일이 열린다. 
