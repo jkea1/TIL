@@ -6,19 +6,33 @@
     <body>
         <script>
             function solution(input){
-                let answer = '';
-                for (let i = 0; i < input; i++) {
-                    if (i >= 5) {
-                    answer += '*****' + '\n';
-                    } else {
-                    answer += '*'.repeat(i + 1) + '\n';
-                    }
+                function solution(input) {
+                let arr = [];
+                for (let i = 1; i <= input; i++) {
+                        if ( 1 <= i && i < 5 ) {
+                            arr.push("*".repeat(i));
+                        } else {
+                            arr.push("*".repeat(5));
+                        }
+                }    
+                // 출력할 결과를 문자열로 return 하세요.
+                return arr.join("\n");
                 }
-            // 출력할 결과를 문자열로 return 하세요.
-            return answer;
             }
 
             console.log(solution(5));
         </script>
     </body>
 </html>
+
+let arr = [];
+    for (let i = 1; i <= input; i++) {
+        if ( 1 <= i && i < 5 ) {
+            arr.push("*".repeat(i));
+        } else {
+            arr.push("*".repeat(5));
+        }
+    }
+
+    // 출력할 결과를 return 하세요.
+    return arr.join("\n");
