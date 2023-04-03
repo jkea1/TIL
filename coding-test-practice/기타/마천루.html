@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(input){
+                let answer = '';
+                for (let i = 0; i < input; i++) {
+                    if (i >= 5) {
+                    answer += '*****' + '\n';
+                    } else {
+                    answer += '*'.repeat(i + 1) + '\n';
+                    }
+                }
+            // 출력할 결과를 문자열로 return 하세요.
+            return answer;
+            }
+
+            console.log(solution(5));
+        </script>
+    </body>
+</html>
