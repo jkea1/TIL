@@ -1,21 +1,10 @@
-//자바스크립트 객체, 구조분해 할당
+const a = "age";
+
 const obj1 = {
-  id: 1,
-  name: 'ea',
-  age: 3,
-  habit: 'coding',
+  id: 1, 
+  name: "ea", 
+  "my name": "개발자", 
+  [a]: 3, //key 값으로 변수를 쓰고 싶다면 대괄호 [] 안에 넣으면 된다. 
 };
 
-obj1.email = 'jinkyng7880@gmail.com';
-
-const obj2 = obj1;
-
-console.log("변경 전");
-console.log("obj1 : ", obj1);
-console.log("obj2 : ", obj2);
-
-obj2.email = "empty";
-
-console.log("변경 후");
-console.log("obj1 : ", obj1);
-console.log("obj2 : ", obj2);
+console.log(a)
