@@ -13,7 +13,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* perspective: 500px; */
+      perspective: 500px;
     }
     .card {
       display: flex;
@@ -25,7 +25,11 @@
       border-radius: 0.5em;
       font-size: 1.5 rem;
       background: red;
-      transform: perspective(500px) rotateY(45deg);
+      transform: rotateY(0deg);
+      transition: 1s;
+    }
+    .world:hover .card {
+      transform: rotateY(180deg);
     }
   </style>
 </head>
