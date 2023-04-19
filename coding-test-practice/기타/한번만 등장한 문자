@@ -1,0 +1,10 @@
+function solution(s) {
+    let answer = '';
+    let sorted = s.split('').sort();
+    let compare = [...new Set(sorted)];
+    for(let i = 0; i < compare.length;i++) {
+        let count = sorted.filter(el => el === compare[i]).length;
+        if(count === 1) answer += compare[i];
+    }
+    return answer;
+}
