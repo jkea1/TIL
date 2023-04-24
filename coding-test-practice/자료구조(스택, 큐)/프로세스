@@ -1,0 +1,40 @@
+function solution(priorities, location) {
+  let arr = priorities.map((priority, index) => ({
+      index: index, 
+      priority: priority
+  }));
+                           
+  console.log(arr);
+  let queue = [];
+
+  while(arr.length > 0) {
+      let firstEle = arr.shift();
+      let hasHighPriority = arr.some(ele => ele.priority > firstEle.priority);
+      if (hasHighPriority) {
+          arr.push(firstEle);
+      } else {
+          queue.push(firstEle);
+      }
+  }
+  return queue.findIndex(queueEl => queueEl.index === location) + 1;
+}
+
+function solution(priorities, location) {
+    const list = priorities.map((t,i)=>({
+        my : i === location,
+        val : t
+    }));
+    let count = 0;        
+    while(true){
+        let cur = list.shift();        
+        if(list.some(t=> t.val > cur.val )){
+            list.push(cur);                        
+        }
+        else{            
+            count++;
+            if(cur.my) return count;
+        }
+    }
+}
+
+  
