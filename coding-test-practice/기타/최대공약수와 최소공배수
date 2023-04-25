@@ -1,0 +1,21 @@
+function solution(n, m) {
+    let [a, b] = [Math.min(n, m), Math.max(n, m)];
+    console.log(a, b);
+    let answer = [];
+    for(let i = a; i >0; i--) {
+        if(b % i === 0 && a % i === 0) { //a % i === 0 부분 추가해야 돼! 최대 공약수니까 a도 나눠 져야지
+            answer.push(i);
+            break;
+        }
+    }
+
+    let num = 1;
+    while(true) {
+        if((b * num) % a === 0) {
+            answer.push(b * num);
+            return answer;
+        } else {
+            num++;
+        }
+    }
+}
