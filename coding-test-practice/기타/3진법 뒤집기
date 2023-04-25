@@ -1,0 +1,15 @@
+//3의 0승, 3, 3*3, 3*3*3
+function solution(n) {
+    let arr = [];
+    let answer = 0;
+    while(n !== 0) {
+        arr.push(n % 3);
+        n = Math.floor(n / 3);
+    };
+    arr.reverse();
+    
+    for(let i = 0; i < arr.length; i++) {
+        answer += (3**i)*arr[i];
+    }
+    return answer
+}
