@@ -1,3 +1,4 @@
+//내 풀이 
 function solution(array, commands) {
     let answer = [];
     for(let i = 0; i < commands.length; i++) {
@@ -7,4 +8,24 @@ function solution(array, commands) {
         answer.push(newArr[commands[i][2]-1]);
     }
     return answer;
+}
+
+//새로 배열을 만들어서 넣는게 아니라 원래 있던 commands 배열에서 변화를 주는 생각이 중용한거 같아. 
+//구조분해 할당으로 풀기 
+function solution(array, commands) {
+    return commands.map(command => {
+        const [sPosition, ePosition, position] = command
+        const newArray = array
+            .filter((value, fIndex) => fIndex >= sPosition - 1 && fIndex <= ePosition - 1)
+            .sort((a,b) => a - b)    
+
+        return newArray[position - 1]
+    })
+}
+
+//식 단순화 해서 풀기 
+function solution(array, commands) {
+    return commands.map(v => {
+        return array.slice(v[0] - 1, v[1]).sort((a, b) => a - b)[v[2] - 1];
+    });
 }
