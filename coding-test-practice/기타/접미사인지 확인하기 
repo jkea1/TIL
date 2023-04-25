@@ -1,0 +1,9 @@
+//arr.includes() 메서드 확인하기 
+function solution(my_string, is_suffix) {
+    let cases = [];
+    for(let i = 0; i < my_string.length; i++) {
+        const string = my_string;
+        cases.push(string.slice(i,string.length));
+    };
+    return cases.includes(is_suffix) ? 1 : 0
+}
