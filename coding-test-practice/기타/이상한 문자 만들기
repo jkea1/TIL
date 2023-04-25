@@ -1,0 +1,18 @@
+function solution(s) {
+    let arr = s.split(' ')
+    .map((el) => {
+        return el.split('')
+    })
+    .map((el) => {
+        for(let i = 0; i < el.length; i++) {
+            if(i % 2 === 0) {
+                el.splice(i,1,el[i].toUpperCase())
+            } else {
+                el.splice(i,1,el[i].toLowerCase())
+            }
+        }
+        return el.join('')
+    }).join(' ')
+    
+    return arr;
+}
