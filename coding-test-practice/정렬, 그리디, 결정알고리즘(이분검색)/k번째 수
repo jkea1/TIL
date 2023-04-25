@@ -1,0 +1,10 @@
+function solution(array, commands) {
+    let answer = [];
+    for(let i = 0; i < commands.length; i++) {
+        const compare = [...array];
+        let newArr = compare.splice(commands[i][0]-1, (commands[i][1])-(commands[i][0])+1);
+        newArr.sort((a, b) => a - b);
+        answer.push(newArr[commands[i][2]-1]);
+    }
+    return answer;
+}

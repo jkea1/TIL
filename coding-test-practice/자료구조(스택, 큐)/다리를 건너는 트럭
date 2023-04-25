@@ -30,4 +30,5 @@ function solution(bridge_length, weight, truck_weights) {
     return totalTime + bridge_length;
 }
 
-//방법2
+//방법2 - 객체 지향적 방법
+
