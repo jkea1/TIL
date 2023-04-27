@@ -1,0 +1,8 @@
+function solution(s, n) {
+    const list =
+    "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXY                          ";
+  return s
+    .split("")
+    .map((e) => list[list.indexOf(e) + n])
+    .join("");
+}
