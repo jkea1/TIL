@@ -1,0 +1,10 @@
+function solution(numbers) {
+    let arr = [];
+    for(let i = 0; i < numbers.length; i++) {
+        for(let j = i+1; j < numbers.length; j++) {
+            let item = numbers[i] + numbers[j];
+            arr.push(item)
+        }
+    }
+    return [...new Set(arr)].sort((a, b) => a- b)
+}
