@@ -1,0 +1,52 @@
+//이렇게 하면 효율성 검사에서 시간 초가 뜸
+function solution(n) {
+    let answer = 0;
+    let count = 0;
+    let arr = [...Array(n).keys()].map(e => e+1).filter(e => e !== 1)
+    
+    for(let i = 0; i < arr.length; i++) {
+        count = 0;
+        for(let j = 2; j <= parseInt(Math.sqrt(arr[i])) ; j++) {
+            if(arr[i] % j === 0) count++;
+        }
+        if(count == 0) answer++;
+    }
+    return answer;
+}
+
+//이렇게 하면 조금더 시간이 더 짧아지기는 하는데 효율성 검사 다 떨어짐
+function solution(n) {
+  //소수 판별하는 함수 
+  function isPrime(num) {
+      if(num === 1) return false;
+      for(let i = 2; i <= parseInt(Math.sqrt(num)); i++) {
+        if(!i%2) continue
+        if(num % i === 0) return false; 
+      }
+    return true;
+  }
+  let arr = [...Array(n).keys()].map(e => e+1)
+  .filter((el) => isPrime(el) === true)
+  return arr.length;
+  
+}
+
+//이렇게 하면 되네 이게 뭐야 ~ 다음에 이해하자 
+function solution(n) {
+  let answer = [];
+  
+  function isPrime (n) {
+    for(let x of answer) {
+      if(x>Math.sqrt(n))return true
+      if(Number.isInteger(n/x)) return false
+    }
+    return true
+  }
+  
+  for(let i=2; i<=n; i++) {
+		if(!i%2) continue
+    if(isPrime(i)) answer.push(i)
+  }
+  
+  return answer.length;
+}
