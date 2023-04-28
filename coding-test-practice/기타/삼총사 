@@ -1,3 +1,18 @@
 //랜덤한 수 세개를 골라서 합이 0이 되는지 비교해야 한다. 
 //for문 3개를 돌리면 된다. 
 
+function solution(number) {
+  let sum = 0;
+  let answer = 0;
+  for(let i = 0; i < number.length; i++) {
+      for(let j = i+1; j < number.length; j++) {
+          for(let k =j+1; k < number.length; k++) {
+              sum = number[i] + number[j] + number[k];
+              if(sum === 0) {
+                  answer++;
+              }
+          }
+      }
+  }
+  return answer;
+}
