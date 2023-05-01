@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Web</title>
+  <style>
+    .container {
+      display: flex;
+      /* flex-direction: column; */
+      /* justify-content: center; */
+      /* align-items: center; */
+      height: 80vh; /* 브라우져 절반을 차지하게 됨 */
+      background: lightgray;
+    }
+    .item {
+      /* flex-grow: 1;
+      flex-basis: 0; */
+      flex: 1;
+      border: 3px solid black;
+      font-size: 3rem;
+      background: white;
+    }
+    /* .item:nth-child(1) { flex-grow: 1; }
+    .item:nth-child(2) { flex-grow: 5; }
+    .item:nth-child(3) { flex-grow: 2; }
+    .item:nth-child(4) { flex-grow: 3; }
+    .item:nth-child(5) { flex-grow: 1; } */
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="item">AA</div>
+    <div class="item">B</div>
+    <div class="item">CCC</div>
+    <div class="item">DDDDD</div>
+    <div class="item">E</div>
+  </div>
+</body>
+</html>
