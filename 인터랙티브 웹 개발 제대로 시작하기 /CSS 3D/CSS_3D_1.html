@@ -23,7 +23,7 @@
       transform: rotateY(0deg);
       transition: 1s;
       transform-style: preserve-3d;
-      transform-origin: left;
+      /* transform-origin: left; */
     }
     .card-side {
       display: flex;
@@ -34,21 +34,29 @@
       top: 0;
       width: 100%;
       height: 100%;
+      /* margin: -75px 0 0 -50px; */
       border-radius: 0.5em;
       font-size: 1.5 rem;
-      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden; /*뒤집어 졌을때 뒷면이 안보이게 하는 속성, 사파리에서 -webkit 접두어가 필요하다.*/
+      backface-visibility: hidden; /* 표준 속성을 지원하는 브라우져 에서, 맨 아래 적어줘야 한다. */
     }
     .card-side-front {
-      background: white;
       z-index: 1;
+      background: white;
     }
     .card-side-back {
       background: red;
-      transform: rotateY(180deg);
-    }
-    .world:hover .card {
       transform: rotateY(-180deg);
     }
+    .world:hover .card {
+      transform: rotateY(180deg);
+    }
+    /* .world:hover .card-side-front {
+      transform: rotateY(180deg);
+    }
+    .world: hover .card-side-back {
+      transform: rotateY(360deg)
+    } */
   </style>
 </head>
 <body>
@@ -57,7 +65,6 @@
       <div class="card-side card-side-front">F</div>
       <div class="card-side card-side-back">B</div>
     </div>
-    
   </div>
 </body>
 </html>
