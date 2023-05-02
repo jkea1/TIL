@@ -102,3 +102,29 @@ charactersElem.removeChild( document.querySelector(".b"))
   </div>
   <div class="element d"></div>
 </body>
+
+//.classList.add()
+//element.classList() => 요소의 클래스 목록에 접근하는 방법이다. 
+//.classList.add() => 요소의 클래스 목록에 접근해서 기존의 클래스는 그대로 두고 클래스를 추가해 준다. 
+const a = document.querySelector('element');
+a.classList.add('special')
+
+->
+<body>
+  <div class="characters">
+    <div class="element a special"></div>
+    <div class="element b"></div>
+    <div class="element c"></div>
+  </div>
+  <div class="element d"></div>
+</body>
+
+//요소.className.add()
+//요소의 원래 class를 모두 지우고 새로운 클래스를 새로 생성한다. 
+
+//.classList.remove()
+요소의 해당 클래스를 제거한다. 
+
+//.classList.toggle()
+해당 클래스를 가지고 있으면 없애고, 가지고 있지 않으면 클래스를 붙여준다. 
+
