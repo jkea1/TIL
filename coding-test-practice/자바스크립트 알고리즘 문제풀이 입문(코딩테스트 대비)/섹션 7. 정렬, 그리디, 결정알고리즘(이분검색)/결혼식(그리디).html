@@ -1,0 +1,24 @@
+//도착하는 시간과 끝나는 시간이 같을 경우 끝나는 시간을 먼저 카운트에 처리해 준다.  
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(times){
+                let answer=Number.MIN_SAFE_INTEGER;
+                let t_line=[];
+                for(let x of times) {
+                    t_line.push([x[0], 's']);
+                    t_line.push([x[1], 'e']);
+                }
+                console.log(t_line);
+                return answer;
+            }
+
+            let arr=[[14, 18], [12, 15], [15, 20], [20, 30], [5, 14]];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
