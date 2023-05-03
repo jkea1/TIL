@@ -1,4 +1,4 @@
-//도착하는 시간과 끝나는 시간이 같을 경우 끝나는 시간을 먼저 카운트에 처리해 준다.  
+<!-- 도착하는 시간과 끝나는 시간이 같을 경우 끝나는 시간을 먼저 카운트에 처리해 준다.   -->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -13,7 +13,16 @@
                     t_line.push([x[0], 's']);
                     t_line.push([x[1], 'e']);
                 }
-                console.log(t_line);
+                t_line.sort((a, b) => {
+                    if(a[0] === b[0]) return a[1].charCodeAt() - b[1].charCodeAt();
+                    else return a[0] - b[0];
+                })
+                let cnt = 0;
+                for(let x of t_line) {
+                    if(x[1] === 's') cnt++;
+                    else cnt--;
+                    answer = Math.max(answer, cnt);    
+                }
                 return answer;
             }
 
