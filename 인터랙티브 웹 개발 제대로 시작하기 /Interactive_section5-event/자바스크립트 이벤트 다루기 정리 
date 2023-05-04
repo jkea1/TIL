@@ -1,0 +1,16 @@
+// 1. x.addEventListener(type, function(){})
+  //x.addEventListener(event 이름, event 발생시 동작할 함수)
+  //ex1
+  const a = document.querySelector('.ilbuni:nth-child(3)');
+  a.addEventListener('click', function() {
+    a.classList.add('special');
+  })
+
+  //ex2 
+  //window : 문서 전체를 나타낸다. 전역객체이다. 
+  //load : 문서 데이터 load가 끝날 떄 까지 기다렸다가 function을 실행시킨다.   
+  window.addEventListener('load', function() {
+    const ilbuni = document.querySelector('.ilbuni.c');
+    console.log(ilbuni)
+})
+
