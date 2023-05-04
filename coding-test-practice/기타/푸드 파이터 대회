@@ -1,0 +1,10 @@
+function solution(food) {
+    let arr = []
+    food.shift();
+    food = food.map((el) => el = Math.floor(el / 2));
+    for(let i = 0; i < food.length; i++) {
+        arr.push(String(i+1).repeat(food[i]));
+    }
+    arr = arr.filter(el => el !== '');
+    return arr.join('') + '0' + arr.reverse().join('')
+}

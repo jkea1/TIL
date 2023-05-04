@@ -1,4 +1,5 @@
-<html>
+1. 이분검색 방법이 아닌 풀이 
+<!-- <html>
     <head>
         <meta charset="UTF-8">
         <title>출력결과</title>
@@ -9,9 +10,42 @@
                 let answer;
                 arr.sort((a, b) => a - b);
                 for(let i = 0; i < arr.length; i++) {
-                  if(x === target) {
+                  if(arr[i] === target) {
                     answer = i+1;
                   }
+                }
+                return answer;
+            }
+
+            let arr=[23, 87, 65, 12, 57, 32, 99, 81];
+            console.log(solution(32, arr));
+        </script>
+    </body>
+</html> -->
+
+2. 이분검색 풀이 
+    순차탐색의 시간 복잡도는 O(n)이다.
+    이분검색의 시간 복잡도는 시간 복잡도 O(log 2 n)으로 더 짧다. 
+      -> 한 번 비교할때 마다 비교할 대상이 절반 떨어져 나간다. 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(target, arr){
+                let answer;
+                arr.sort((a, b)=>a-b);
+                let lt=0, rt=arr.length-1;
+                while(lt<=rt){
+                  let mid=parseInt((lt+rt)/2);
+                  if(arr[mid]===target) {
+                    answer=mid+1;
+                    break;
+                  } 
+                  else if (arr[mid] > target) rt = mid-1;
+                  else lt = mid+1;
                 }
                 return answer;
             }
