@@ -8,58 +8,24 @@
     <link rel="stylesheet" href="css/reset.css">
     <style>
         .stage {
-            overflow: hidden;
-            position: relative;
             width: 100vw;
-            height: 75vw;
+            height: 75vw; /* vw 대신 vh를 사용할 수 있다. */ 
             background: #fff000;
         }
-        @keyframes moving {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(90vw);
-            }
-        }
         .ilbuni {
-            position: absolute;
             width: 100px;
             height: 100px;
-            background-repeat: no-repeat;
-            background-position: 50% 50%;
-            background-size: contain;
-            animation: moving infinite alternate;
-        }
-        .ilbuni.a {
-            left: 5%;
-            bottom: 5%;
-            background-image: url('images/ilbuni_0.png');
-            animation-duration: 2s;
-        }
-        .ilbuni.b {
-            left: 10%;
-            bottom: 3%;
-            background-image: url('images/ilbuni_1.png');
-            animation-duration: 3s;
-        }
-        .ilbuni.c {
-            left: 7%;
-            bottom: 10%;
-            background-image: url('images/ilbuni_2.png');
-            animation-duration: 4s;
+            background-repeat: no-repeat; 
+            background-position: 50% 50%; /* 이미지가 중간에 위치 할 수 있도록 해준다. */
+            background-size: contain; /* 이미지가 짤리지 않고 가로 혹은 세로에 딱 맞도록 해준다. */
         }
     </style>
 </head>
 <body>
     <div class="stage">
-        <div class="ilbuni a"></div>
-        <div class="ilbuni b"></div>
-        <div class="ilbuni c"></div>
+        <div class="ilbuni"></div>
+        <div class="ilbuni"></div>
+        <div class="ilbuni"></div>
     </div>
-
-    <script>
-        // 직접 타이핑 해보세요
-    </script>
 </body>
 </html>
