@@ -20,6 +20,7 @@
         .ilbuni {
             width: 100px;
             cursor: pointer;
+            cursor: pointer;
         }
         .characters .ilbuni {
             display: inline-block;
@@ -28,15 +29,6 @@
             border: 10px dashed red;
         }
     </style>
-    <script>
-        window.addEventListener('load', function() {
-            const ilbuni = document.querySelector('.ilbuni.c');
-            function clickIlbuniHandler() {
-                ilbuni.classList.toggle('special');
-            }
-            ilbuni.addEventListener('click', clickIlbuniHandler);
-        })
-    </script>
 </head>
 <body>
     <div class="characters">
@@ -55,7 +47,16 @@
     </div>
 
     <script>
-        // 직접 타이핑 해보세요
+        //함수을 호출 연산자로 실행해준다. 
+        (function() {
+            const characters = document.querySelector('.characters');
+            function clickHandler(e) {
+                //console.log(this);
+                //console.log(e.currentTarget);
+                console.log(e.target);
+            }
+            characters.addEventListener('click', clickHandler);
+        })();
     </script>
 </body>
 </html>
