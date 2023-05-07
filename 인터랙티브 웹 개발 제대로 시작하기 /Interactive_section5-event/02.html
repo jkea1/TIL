@@ -62,18 +62,15 @@
     </div>
     <script>
         (function() {
-            const ilbuniGroup = document.querySelectorAll('.ilbuni');
+            //이벤트 위임
             const stage = document.querySelector('.stage');
 
             function clickHandler(e) {
-                console.log(this);
-                //stage.removeChild(this);
-                this.parentNode.removeChild(this);
+                if(e.target.classList.contains('ilbuni')) {
+                    stage.removeChild(e.target);
+                }
             }
-
-            for(let i = 0; i < ilbuniGroup.length; i++) {
-                ilbuniGroup[i].addEventListener('click', clickHandler);
-            }
+            stage.addEventListener('click', clickHandler);
         })();
     </script>
 </body>
