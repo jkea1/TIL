@@ -60,7 +60,19 @@ The iteraation(반복) protocols
 
 
   3. Iterable 예시
-    -> String, Array, TypedArray, Map and Set 는 모두 내장 iterable이다. 이 객체들의 프로토타입 객체들은 모두 @@iterator 메소드를 가지고 있기 때문이다.
+    -> String, Array, TypedArray, Map and Set 는 모두 내장 iterable이다. 이 객체들의 프로토타입 객체들은 모두 @@iterator 메소드(Symbol.iterator 함수)를 가지고 있기 때문이다.
+
+    -> 사용자가 직접 고유한 iterables를 만들 수 있다. 
+      * 객체를 생성한 다음에 [Symbol.iterator]라는 함수를 정의해 주면 된다. 
+      ex)
+      var myIterable = {};
+      myIterable[Symbol.iterator] = function* () {
+          yield 1;
+          yield 2;
+          yield 3;
+      };
+      [...myIterable]; // [1, 2, 3]
+
 
 
 
