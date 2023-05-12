@@ -52,7 +52,7 @@ The iteraation(반복) protocols
     iterator.next(); // { value: "i", done: false }
     iterator.next(); // { value: undefined, done: true }
 
-    ⭐️⭐️ spread operator와 같은 특정 내장 구조(built-in constructs)들은 실제로는 동일한 iteration protocol을 사용한다.
+    ⭐️⭐️ spread operator와 같은 특정 내장 구조(built-in constructs)들은 실제로는 동일한 iterator protocol을 사용한다.
     -> string을 분해해서 배열 데이터로 만들어 준다. 
     [...someString] // ["h", "i"]
 
