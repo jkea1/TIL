@@ -7,12 +7,71 @@
 	<title>Interactive Web</title>
 	<link rel="stylesheet" href="css/reset.css">
 	<style>
-		
+		.stage { /* 화면에 꽉채우기 위해서 viewport 단위를 사용한다.  */
+			width: 100vw;
+			height: 100vh;
+			background: #333;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.door {
+			position: relative;
+			width: 100px;
+			height: 150px;
+			/* outline: 2px dashed yellow; */
+		}
+		.door-back {
+			position : absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: black;
+		}
+		.ilbuni {
+			position: absolute;
+			left: 0;
+			bottom: 0; /* 바닥에 서있어야 하니까 */
+			width: 100px;
+			height: 100px;
+			background-repeat: no-repeat;
+			background-position: 50% 100%; /* 가로로는 왼쪽에서 50% 위치, 세로로는 위에서 부터 100%니까 가장 아래에서부터 위치 시킨다는 말이다.  */
+			background-size: contain; /* 100px 100px 가로 세로 안에 모두 들어오도록 */
+			/* outline: 2px dashed red; */
+		}
+		.door:nth-child(1) .ilbuni { background-image: url(images/ilbuni_0.png); } /* door 들 중에 첫번째 door에 있는 ilbuni  */
+		.door:nth-child(2) .ilbuni { background-image: url(images/ilbuni_1.png); }
+		.door:nth-child(3) .ilbuni { background-image: url(images/ilbuni_2.png); }
+		.door-body {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+		.door:nth-child(1) .door-body { background: rgba(255, 0, 0, 0.7);}
+		.door:nth-child(2) .door-body { background: rgba(0, 255, 0, 0.7);}
+		.door:nth-child(3) .door-body { background: rgba(0, 0, 255, 0.7);}
 	</style>
 </head>
 <body>
-
-	<script>
-	</script>
+	<div class="stage">
+		<div class="door">
+			<div class="door-back"></div>
+			<div class="ilbuni"></div>
+			<div class="door-body"></div>
+		</div>
+		<div class="door">
+			<div class="door-back"></div>
+			<div class="ilbuni"></div>
+			<div class="door-body"></div>
+		</div>
+		<div class="door">
+			<div class="door-back"></div>
+			<div class="ilbuni"></div>
+			<div class="door-body"></div>
+		</div>
+	</div>
 </body>
 </html>
