@@ -14,6 +14,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			/* perspective: 800px; */
 		}
 		.door {
 			position: relative;
@@ -22,6 +23,7 @@
 			/* outline: 2px dashed yellow; */
 		}
 		.door-back {
+			overflow: hidden; /* door-back 밖으로 나간 컨텐츠는 안보이게 된다. */
 			position : absolute;
 			left: 0;
 			top: 0;
@@ -39,6 +41,8 @@
 			background-position: 50% 100%; /* 가로로는 왼쪽에서 50% 위치, 세로로는 위에서 부터 100%니까 가장 아래에서부터 위치 시킨다는 말이다.  */
 			background-size: contain; /* 100px 100px 가로 세로 안에 모두 들어오도록 */
 			/* outline: 2px dashed red; */
+			transform: translate3d(100%, 0, 0);
+			transition: 0.5s 0.5s; /* transtion 시간, delay */
 		}
 		.door:nth-child(1) .ilbuni { background-image: url(images/ilbuni_0.png); } /* door 들 중에 첫번째 door에 있는 ilbuni  */
 		.door:nth-child(2) .ilbuni { background-image: url(images/ilbuni_1.png); }
@@ -49,27 +53,38 @@
 			top: 0;
 			width: 100%;
 			height: 100%;
+			transition: 0.5s; /* 애니메이션 transition 지속시간 */
+			transform-origin: 0%;
 		}
 		.door:nth-child(1) .door-body { background: rgba(255, 0, 0, 0.7);}
 		.door:nth-child(2) .door-body { background: rgba(0, 255, 0, 0.7);}
 		.door:nth-child(3) .door-body { background: rgba(0, 0, 255, 0.7);}
+		.door:hover .door-body {
+			transform: perspective(800px) rotateY(-110deg);
+		}
+		.door:hover .ilbuni {
+			transform: translate3d(0, 0, 0);
+		}
 	</style>
 </head>
 <body>
 	<div class="stage">
 		<div class="door">
-			<div class="door-back"></div>
-			<div class="ilbuni"></div>
+			<div class="door-back">
+				<div class="ilbuni"></div>
+			</div>
 			<div class="door-body"></div>
 		</div>
 		<div class="door">
-			<div class="door-back"></div>
-			<div class="ilbuni"></div>
+			<div class="door-back">
+				<div class="ilbuni"></div>
+			</div>
 			<div class="door-body"></div>
 		</div>
 		<div class="door">
-			<div class="door-back"></div>
-			<div class="ilbuni"></div>
+			<div class="door-back">
+				<div class="ilbuni"></div>
+			</div>
 			<div class="door-body"></div>
 		</div>
 	</div>
