@@ -22,7 +22,7 @@ data type
 6. undefined 값
   : 값이 할당되지 않은 상태를 나타낸다. 
 
-  ❗️ null vs undefined
+  ❗️ undefined vs null 
     아직 값을 할당한 상태가 아니면 undefined 한 상태가 맞고, 개발자가 고의로 값을 비워뒀다면 null을 사용하는 것이 맞다.
 
 7. 객체 
@@ -36,7 +36,7 @@ data type
       2. 함수로의 방식
         : 연산의 우선순위를 놓여야 할때 사용
         typeof(...)
-          ex) type(1+2);
+          ex) typeof(1+2);
       
       ⭐️ typeof null의 결과는 "object"이다. 
         -> null은 별도의 고유한 자료형을 가지는 특수 값으로 객체가 아니지만, 하위 호환성을 유지하기 위해 이런 오류를 수정하지 않고 남겨둔 상황이다. 

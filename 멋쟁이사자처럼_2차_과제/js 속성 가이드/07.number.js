@@ -3,14 +3,14 @@
 let billion1 = 1_000_000_000;
 
 //지수
-let billion2 = 1e9;
+let billion2 = 10e9;
 
 console.log(billion1)
 
 //8가지 자료형들은 각자 가지고 있는 능력들이 있다. 
 // => method
 
-//숫자형에서 사용할 수 있는 메서드들중 하나가 parseInt() 와 parseFloat이다. 
+//숫자형에서 사용할 수 있는 메서드들중 하나가 parseInt() 와 parseFloat()이다. 
 let width = '20e0.1235px';
 
 //정수로 해석해서 정수의 값만 내보내준다. 
