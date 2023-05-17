@@ -91,13 +91,35 @@
 	<script>
 		(function() {
 			const stageElem = document.querySelector('.stage');
+			
+			//현재 활성화된 아이템을 저장하고 있는 변수
+			let currentItem;
+
+			//활성화
+			function activate(el) {
+				el.classList.add('door-opened');
+				currentItem = el;
+			};
+
+			//비활성화
+			function inactivate(el) {
+				el.classList.remove('door-opened');
+			};
+
 			function doorHandler(e) {
 				const targetElem = e.target;
+
+				if(currentItem) {
+					inactivate(currentItem);
+				}
+
 				if(targetElem.classList.contains('door-body')) {
-					targetElem.parentNode.classList.add('door-opened');
+					activate(targetElem.parentNode);
 				}
 			}
 			stageElem.addEventListener('click', doorHandler);
+			//하나의 문을 연 상태로 시작하고 싶다면
+			activate( document.querySelector('.door:nth-child(2)'));
 		})();
 	</script>
 </body>
