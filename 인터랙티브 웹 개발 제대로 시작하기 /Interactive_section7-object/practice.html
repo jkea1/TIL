@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object</title>
+</head>
+<body>
+  <h1>Object</h1>
+  <script>
+    //생성자 함수 = constructor
+    function Person(nickname, age) {
+      this.nickname = nickname;
+      this.age = age;
+      this.introduce = function () {
+        console.log("안녕하세요. 나는" +  this.nickname + ".");
+      }
+    }
+    //객체 생성
+    //생성자 함수로 생성해낸 객체를 인스턴스(instance)라고 한다. 
+    const person1 = new Person('일분이', 10);
+    const person2 = new Person('이분이', 8);
+    
+    person1.introduce();
+    person2.introduce();
+    console.log(person1);
+  </script>
+</body>
+</html>
