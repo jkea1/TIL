@@ -5,24 +5,53 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Object</title>
+  <style>
+    .card {
+      display: inline-flex; /* div가 블록 element니까 위아래로 div가 배열되니깐 inline-flex로 해서 가로로 정렬되게 한다. */
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 150px;
+      border: 2px solid black;
+      border-radius: 10px;
+      font-size: 3rem;
+      font-weight: 900;
+    }
+  </style>
 </head>
 <body>
   <script>
     function Card(num, color) {
       this.num = num;
       this.color = color;
+      //init 메서드를 호출을 해야 돔 구성이 된다.ㅋ
+      this.init();
+    }
+    
+    //prototype 
+    //prototype 이용해서 인스턴스끼리 공유되는 속성을 추가한다. 
+    //prototype이 객체 이기 때문에 이렇게 나타낼 수 도 있다. 
+    //이렇게 객체를 새로 생성할 때는 constructor 속성을 내가 만든 생성자 함수 이름으로 넣어줘야 한다. 
+    Card.prototype = {
+      constructor: Card, 
+      //원하는 메서드를 추가하면 된다. 
+      init: function() {
+        const mainElem = document.createElement('div');
+        mainElem.style.color = this.color;
+        mainElem.innerHTML = this.num;
+        mainElem.classList.add('card');
+        //실제로 body로 조립되어 화면에 보여지게 한다. 
+        document.body.appendChild(mainElem);
+      }
     }
 
     //인스턴스끼리 공유되는 부분은 prototype 안에 정렬해 준다. 
-    Card.prototype.width = 100;
-    Card.prototype.height = 150; 
+    // Card.prototype.width = 100;
+    // Card.prototype.height = 150; 
 
     const card1 = new Card(1, 'green');
     const card2 = new Card(7, 'blue');
-
-    console.log("card1", card1);
-    console.log("card2", card2);
-
+    console.log(card1);
   </script>
 </body>
 </html>
