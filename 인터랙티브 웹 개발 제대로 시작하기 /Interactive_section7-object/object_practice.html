@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object</title>
+</head>
+<body>
+  <script>
+    function Card(num, color) {
+      this.num = num;
+      this.color = color;
+    }
+
+    //인스턴스끼리 공유되는 부분은 prototype 안에 정렬해 준다. 
+    Card.prototype.width = 100;
+    Card.prototype.height = 150; 
+
+    const card1 = new Card(1, 'green');
+    const card2 = new Card(7, 'blue');
+
+    console.log("card1", card1);
+    console.log("card2", card2);
+
+  </script>
+</body>
+</html>

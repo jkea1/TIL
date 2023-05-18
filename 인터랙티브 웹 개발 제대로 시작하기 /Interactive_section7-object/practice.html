@@ -10,14 +10,20 @@
   <h1>Object</h1>
   <script>
     //생성자 함수 = constructor
+    //개별적인 값을 가지고 있는 경우 
     function Person(nickname, age) {
       this.nickname = nickname;
       this.age = age;
-      this.introduce = function () {
-        console.log("안녕하세요. 나는" +  this.nickname + ".");
-      }
     }
+    //prototype 객체 
+    //생성자 함수와 쌍으로 생성된다.  
+    //똑같이 공유하고 있는 경우에는 prototype 객체 안에 정렬해 주면 된다.  
+    Person.prototype.introduce = function() {
+      console.log("안녕하세요. 나는" +  this.nickname + ".");
+    }
+    
     //객체 생성
+    //인스턴스
     //생성자 함수로 생성해낸 객체를 인스턴스(instance)라고 한다. 
     const person1 = new Person('일분이', 10);
     const person2 = new Person('이분이', 8);
