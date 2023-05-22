@@ -7,11 +7,20 @@
   <title>Transition/Animation Event</title>
   <style>
     .ball {
+      position: absolute; /* 이렇게만 하면 여전히 ball의 왼쪽 위가 기준이다. -> 우리는 center를 기준으로 하고 싶다. -> margin을 조정해줘야 한다. */
+      left: 0;
+      top: 0;
       width: 30px;
       height: 30px;
+      /* margin: -15px 0 0 -15px; -> CSS로 조절하기 싫다면 e.clientX와 Y를 조정해도 된다. -> 이렇게 하면 시작점에서 ball이 가려지지않고 예쁘네! */
       border-radius: 50%;
       background: red;
-      transition: 1s;
+      transition: 2s;
+    }
+
+    /* ball 클래스에 end 클래스가 붙으면 변화를 준다.*/
+    .ball.end {
+      background: dodgerblue;
     }
   </style>
 </head>
@@ -19,9 +28,16 @@
   <div class="ball"></div>
   <script>
     const ballElem = document.querySelector('.ball');
+    
     window.addEventListener('click', function(e) {
-      console.log(e.clientX, e.clientY);
-      
+      ballElem.style.transform = 'translate(' + (e.clientX - 15) + 'px, ' + (e.clientY - 15) + 'px)';
+    })
+    
+    //transition이 끝나면 공의 색이 변하게 하기
+    ballElem.addEventListener('transitionstart', function(e) {
+      ballElem.classList.add('end');
+      console.log("elapsedTime", e.elapsedTime);
+      console.log("propertyName", e.propertyName);
     })
   </script>
 </body>
