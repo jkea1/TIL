@@ -22,7 +22,9 @@
       console.log('sample!');
     };
 
-    timeId = setTimeout(sample, 2000); 
+    timeId = setInterval(sample, 1000); 
+
+    // timeId = setTimeout(sample, 2000); 
 
     btn.addEventListener('click', function() {
       clearTimeout(timeId);
