@@ -16,19 +16,27 @@
 
   <script>
     let timeId;
+    let n = 0;
     const btn = document.querySelector('.btn');
 
     function sample() {
-      console.log('sample!');
+      n++;
+      console.log(n);
+      if(n > 200) {
+        return; //종료
+      }
+      timeId = requestAnimationFrame(sample); //requestAnimationFrame() 함수가 실행되면서 sample을 다시 호출하게 된다.
     };
 
-    timeId = setInterval(sample, 1000); 
+    //requestAnimationFrame(sample); 
+    
+    sample();
 
-    // timeId = setTimeout(sample, 2000); 
+    //timeId = setTimeout(sample, 2000); 
 
     btn.addEventListener('click', function() {
-      clearTimeout(timeId);
-    })
+      cancelAnimationFrame(timeId);
+    });
   </script>
 </body>
 </html>
