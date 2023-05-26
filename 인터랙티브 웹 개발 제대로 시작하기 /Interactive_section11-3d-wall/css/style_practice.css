@@ -25,3 +25,32 @@ body {
   height: 100vh;
   transform-style: preserve-3d; /* 3d 효과가 자식요소까지 잘 적용이 되도록 */
 }
+
+/* house의 디폴트는 꽉차게*/
+.house {
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+}
+
+.wall {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255,255,255,0.8);
+}
+
+.wall-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.wall-title {
+  font-size: 5rem;
+}
+
+/* 하... position을 뭘로 선택할지 어렵다... *
