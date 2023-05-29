@@ -30,6 +30,7 @@ body {
 .house {
   width: 100vw;
   height: 100vh;
+  transform: translateZ(-490vw);
   transform-style: preserve-3d;
 }
 
@@ -40,6 +41,18 @@ body {
   width: 100vw;
   height: 100vh;
   background: rgba(255,255,255,0.8);
+}
+
+.wall-left {
+  left: -500vw;
+  width: 1000vw;
+  transform: rotateY(90deg); /* 생각을 해봐! wall-left의 중앙을 (0, 0)으로 하고 y축을 기준으로 회전 시킨다고 생각해!  */
+}
+
+.wall-right {
+  left: -500vw;
+  width: 1000vw;
+  transform: rotateY(90deg) translateZ(100vw);
 }
 
 .wall-content {
@@ -53,4 +66,3 @@ body {
   font-size: 5rem;
 }
 
-/* 하... position을 뭘로 선택할지 어렵다... *
