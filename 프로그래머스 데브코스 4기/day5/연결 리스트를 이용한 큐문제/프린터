@@ -1,0 +1,57 @@
+//연결 리스트를 이용한 큐
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class Queue {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+    enqueue(newValue) {
+        const newNode = new Node(newValue);
+        if(this.head === null) {
+            this.head = this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            this.tail = newNode;
+        }
+    }
+    dequeue() {
+        const value = this.head.value;
+        this.head = this.head.next;
+        return value;
+    }
+    //현재 head의 값을 알아낸다. 
+    peak() {
+        return this.head.value;
+    }
+}
+
+
+
+function solution(priorities, location) {
+    const queue = new Queue();
+    for(let i = 0; i < priorities.length; i++) {
+        queue.enqueue([priorities[i], i]); //큐에 값을 다 넣어줌
+    }
+    
+    priorities.sort((a, b) => b - a);
+    let count = 0;
+    while(true) { //무한 루프 형태
+        const currentValue = queue.peak(); //현재 큐의 front에 해당하는 값이다. 
+        if(currentValue[0] < priorities[count]) {
+            queue.enqueue(queue.dequeue()); //다시 맨 뒤에 넣는다. 
+        } else {
+            const value = queue.dequeue();
+            count++; //문서가 한 빠졌으니 채워준다. 
+            if(location === value[1]) {
+                return count;
+            }
+        }
+    }
+    return count;
+}
