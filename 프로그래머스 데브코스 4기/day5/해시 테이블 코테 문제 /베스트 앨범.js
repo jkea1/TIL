@@ -3,6 +3,7 @@
 //3. 노래를 2개까지 자르는 잡업을 해야한다. 
 
 //핵심 키워드 "묶는 것", "정렬"
+// "묶는다"는 키워드가 있을때는 해시 테이블과 연관이 있을 가능성이 높다.
 
 function solution(genres, plays) {
   const genreMap = new Map();
