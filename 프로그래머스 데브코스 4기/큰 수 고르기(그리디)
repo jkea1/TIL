@@ -1,0 +1,22 @@
+//큰 값이 나오면 이전 값 중 더 작은 값은 전부다 삭제한다. 
+//즉, 스택의 바닥에서 부터 탑은 큰 수 부터 작은 수로 나열이 되어야 한다. 
+
+//그리디 문제들의 특징은 입력값이 크고, 직관적으로 풀어볼 수 있는 문제들이 있다. 
+function solution(number, k) {
+    const stack = [];
+    let count = 0;
+    for(const item of number) {
+        while(count < k && stack[stack.length - 1] < item) {
+            stack.pop();
+            count++;
+        }
+        stack.push(item);
+    }
+    
+    //9876543 같은 경우도 처리해 주기 위해
+    while(count < k) {
+        stack.pop();
+        count++;
+    }
+    return stack.join("");
+}
