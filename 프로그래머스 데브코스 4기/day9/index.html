@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Editer</title>
+  <link href="index.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+  <div class="toolbar">
+    <button data-command="bold">Bold</button>
+    <button data-command="italic">Italic</button>
+    <button data-command="underline">Underline</button>
+    <button data-command="strikeThrough">Strike Through</button>
+    <button data-command="justifyLeft">Align Left</button>
+    <button data-command="justifyCenter">Align Center</button>
+    <button data-command="justifyRight">Align Right</button>
+  </div>
+  <div class="editor" contenteditable="true"></div>
+  <script src="index.js"></script>
+</body>
+</html>
