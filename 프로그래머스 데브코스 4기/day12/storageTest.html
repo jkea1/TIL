@@ -1,0 +1,23 @@
+<html>
+
+<body>
+  <input type="text" id="name">
+  <button id="save">Save</button>
+  <button id="remove">Remove</button>
+  <script>
+    const storedName = localStorage.getItem('name') || ''
+    if (storedName) {
+      document.querySelector('#name').value = storedName
+    }
+
+    document.querySelector('#save').addEventListener('click', () => {
+      localStorage.setItem('name', document.querySelector('#name').value)
+    })
+
+    document.querySelector('#remove').addEventListener('click', () => {
+      localStorage.removeItem('name')
+    })
+  </script>
+</body>
+
+</html>
