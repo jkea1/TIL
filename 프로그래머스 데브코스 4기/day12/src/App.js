@@ -11,6 +11,8 @@ function App({ $target, initialState }) {
         },
       ];
       todoList.setState(nextState);
+
+      localStorage.setItem("todos", JSON.stringify(nextState));
     },
   });
 
