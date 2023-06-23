@@ -6,9 +6,26 @@
 
 <body>
   <script>
-    fetch('https://kdt-frontend.programmers.co.kr/todos')
+    // fetch('https://kdt-frontend.programmers.co.kr/todos')
+    //   .then(res => {
+    //     return res.json();
+    //   })
+    //   .then(data => { //실제로 promise 체인에서 받을 수 있다.
+    //     return data //원하는 json 데이터를 받을 수 있다.
+    //   })
+
+    fetch('https://kdt-frontend.programmers.co.kr/users')
       .then(res => {
-        console.log(res)
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error(`Status: ${res.status} 요청을 처리하지 못하였어요.`) //catch로 넘어간다. 
+      })
+      .then(data => {
+        console.log(data)
+      })
+      .catch(e => {
+        document.querySelector('body').innerHTML = e.message;
       })
   </script>
 </body>
