@@ -1,0 +1,34 @@
+<html>
+
+<body>
+  <div id="container"></div>
+  <a class="LinkItem" href="/product-list">product list</a>
+  <a class="LinkItem" href="/article-list">article list</a>
+  <script>
+    function route() {
+      const { pathname } = location
+      const $container = document.querySelector('#container')
+      if (pathname === '/') {
+        $container.innerHTML = "<h1>Home</h1>"
+      } else if (pathname === '/product-list') {
+        $container.innerHTML = "<h1>상품목록</h1>"
+      } else if (pathname === '/article-list') {
+        $container.innerHTML = "<h1>게시글 목록</h1>"
+      }
+    }
+
+    window.addEventListener('click', e => {
+      if (e.target.className === 'LinkItem') {
+        e.preventDefault(); //이동 금지
+        const { href } = e.target;
+        const path = href.replace(window.location.origin, '');
+        history.pushState(null, null, path);
+        route();
+      }
+    })
+
+    window.addEventListener('popstate', () => route()) //뒤 혹은 앞으로 가기 인식한다. 
+  </script>
+</body>
+
+</html>
