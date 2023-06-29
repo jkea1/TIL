@@ -1,25 +1,51 @@
 import { request } from "./api.js";
+import UserList from "./UserList.js";
 import Header from "./Header.js";
 import TodoForm from "./TodoForm.js";
 import TodoList from "./TodoList.js";
+import { parse } from "./querystring.js";
 
 export default function App({ $target }) {
+  const $userListContainer = document.createElement("div");
+  const $todoListContainer = document.createElement("div");
+
+  $target.appendChild($userListContainer);
+  $target.appendChild($todoListContainer);
+
   this.state = {
-    username: "ea",
+    userList: [],
+    selectedUsername: null,
     todos: [],
     isTodoLoading: false,
   };
 
-  const header = new Header({
-    $target,
-    initialState: {
-      isLoading: this.state.isTodoLoading,
-      username: this.state.username,
+  const userList = new UserList({
+    $target: $userListContainer,
+    initialState: this.state.userList,
+    onSelect: async (username) => {
+      history.pushState(null, null, `/?selectedUsername=${username}`);
+      this.setState({
+        ...this.state,
+        selectedUsername: username,
+      });
+      await fetchTodos();
     },
   });
+
+  const header = new Header({
+    $target: $todoListContainer,
+    initialState: {
+      isLoading: this.state.isTodoLoading,
+      selectedUsername: this.state.selectedUsername,
+    },
+  });
+
   new TodoForm({
-    $target,
+    $target: $todoListContainer,
+
     onSubmit: async (content) => {
+      //낙관적 업데이트를 해서 isFirstTodoAdd 코드를 위로 올리는 게 맞다.
+      const isFirstTodoAdd = this.state.todos.length === 0;
       const todo = {
         content,
         isCompleted: false,
@@ -33,55 +59,104 @@ export default function App({ $target }) {
         todos: [...this.state.todos, todo],
       });
 
-      await request(`/${this.state.username}?delay=3000`, {
+      console.log(isFirstTodoAdd, this.state.todos.length);
+      await request(`/${this.state.selectedUsername}`, {
         method: "POST",
         //request body 부분은 백엔드와 잘 협의 해야 한다.
         body: JSON.stringify(todo),
       });
       await fetchTodos(); //init() 해 줘야
+
+      if (isFirstTodoAdd) {
+        await fetchUserList();
+      }
     },
   });
 
   this.setState = (nextState) => {
     this.state = nextState;
+
     header.setState({
       isLoading: this.state.isTodoLoading,
-      username: this.state.username,
+      selectedUsername: this.state.selectedUsername,
     });
+
     todoList.setState({
       isLoading: this.state.isTodoLoading,
       todos: this.state.todos,
+      selectedUsername: this.state.selectedUsername,
     });
+
+    userList.setState(this.state.userList);
+
+    this.render();
+  };
+
+  this.render = () => {
+    const { selectedUsername } = this.state;
+    $todoListContainer.style.display = selectedUsername ? "block" : "none";
   };
 
   const todoList = new TodoList({
-    $target,
+    $target: $todoListContainer,
     initialState: {
       isTodoLoading: this.state.isTodoLoading,
       todos: this.state.todos,
+      selectedUsername: this.state.selectedUsername,
     },
+
     onToggle: async (id) => {
-      await request(`/${this.state.username}/${id}/toggle`, {
+      const todoIndex = this.state.todos.findIndex((todo) => todo._id === id);
+
+      const nextTodos = [...this.state.todos];
+      nextTodos[todoIndex].isCompleted = !nextTodos[todoIndex].isCompleted;
+
+      //낙관적 업데이트
+      this.setState({
+        ...this.state,
+        todos: nextTodos,
+      });
+
+      await request(`/${this.state.selectedUsername}/${id}/toggle`, {
         method: "PUT",
       });
       await fetchTodos();
     },
     onRemove: async (id) => {
-      await request(`/${this.state.username}/${id}`, {
+      const todoIndex = this.state.todos.findIndex((todo) => todo._id === id);
+      const nextTodos = [...this.state.todos];
+      nextTodos.splice(todoIndex, 1);
+
+      //낙관적 업데이트
+      this.setState({
+        ...this.state,
+        todos: nextTodos,
+      });
+
+      await request(`/${this.state.selectedUsername}/${id}`, {
         method: "DELETE",
       });
       await fetchTodos();
     },
   });
 
+  const fetchUserList = async () => {
+    const userList = await request("/users");
+    console.log(userList);
+    this.setState({
+      ...this.state,
+      userList,
+    });
+  };
+
   const fetchTodos = async () => {
-    const { username } = this.state;
-    if (username) {
+    const { selectedUsername } = this.state;
+    if (selectedUsername) {
       this.setState({
         ...this.state,
         isTodoLoading: true,
       });
-      const todos = await request(`/${username}?delay=5000`);
+      const todos = await request(`/${selectedUsername}`);
       this.setState({
         ...this.state,
         todos,
@@ -90,5 +165,30 @@ export default function App({ $target }) {
     }
   };
 
-  fetchTodos();
+  const init = async () => {
+    await fetchUserList();
+
+    //url에 특정사용자를 나타내는 값이 있을 경우
+    const { search } = location;
+    console.log("search.substring", search.substring(1));
+
+    if (search.length > 0) {
+      const { selectedUsername } = parse(search.substring(1)); // ❗️❗️❗️ 원래 객체로 감싸는데 걍 에러 떠서 뺐어.
+
+      if (selectedUsername) {
+        this.setState({
+          ...this.state,
+          selectedUsername, // /euna -> euna
+        });
+        await fetchTodos(); //이거 안 넣으면 해당 user의 todos 렌더 안된다
+      }
+    }
+  };
+
+  this.render();
+  init();
+
+  window.addEventListener("popstate", () => {
+    init();
+  });
 }

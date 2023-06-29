@@ -27,6 +27,7 @@ export default function TodoList({
       $todo.innerHTML = `Todo가 없습니다.`;
       return;
     }
+
     $todo.innerHTML = `
       <ul>
         ${todos
