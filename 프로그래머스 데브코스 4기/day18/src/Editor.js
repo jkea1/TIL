@@ -1,0 +1,44 @@
+// 텍스트 편집하는 방법 2가지
+// 1. textarea
+// 2. content editable
+
+export default function Editor({
+  $target,
+  initialState = {
+    title: '',
+    content: '',
+  },
+}) {
+  const $editor = document.createElement('div');
+
+  this.state = initialState;
+
+  $target.appendChild($editor);
+  this.setState = (nextState) => {
+    this.state = nextState;
+    this.render();
+  };
+  this.render = () => {
+    $editor.innerHTML = `
+      <input type="text" name="title" style="width: 600px;" value="${this.state.title}"/>
+      <textarea name="content" style="width:600px;height: 400px;">${this.state.content}</textarea>
+    `;
+  };
+  this.render();
+
+  $editor.addEventListener('keyup', (e) => {
+    // 키업 event가 두군데 발생할 수 있기 때문에 event 버블링을 이용해서 title에서 발생한건지 textarea 에서 발생한건지 판단하면 된다.
+    const { target } = e;
+
+    const name = target.getAttribute('name');
+
+    if (this.state[name]) {
+      // 방어코드
+      const nextState = {
+        ...this.state,
+        [name]: target.value, // key 부분을 이렇게 변수로 둘 수 있다.
+      };
+      console.log(nextState);
+    }
+  });
+}
