@@ -188,6 +188,7 @@ export default function App({ $target }) {
   this.render();
   init();
 
+  //뒤로 가기해도 처리가능
   window.addEventListener("popstate", () => {
     init();
   });

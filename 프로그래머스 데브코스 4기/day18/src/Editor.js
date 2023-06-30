@@ -39,7 +39,8 @@ export default function Editor({
 
     const name = target.getAttribute('name');
 
-    if (this.state[name]) {
+    // 빈 문자열도 parse로 처리해 버리기 때문에 정확히 undefined가 아닐때만 실행되게 해야한다.
+    if (this.state[name] !== undefined) {
       // 방어코드
       const nextState = {
         ...this.state,
