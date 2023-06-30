@@ -10,6 +10,9 @@ new Editor({
     title: '오늘의 학습일지',
     content: '자바스크립트',
   },
+  onEditing: (post) => {
+    console.log(post);
+  },
 });
 
 // const DUMMY_DATA = [

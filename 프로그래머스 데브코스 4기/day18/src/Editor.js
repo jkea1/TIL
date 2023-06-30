@@ -8,8 +8,11 @@ export default function Editor({
     title: '',
     content: '',
   },
+  onEditing,
 }) {
   const $editor = document.createElement('div');
+  // isInitialize 값에 따라서 innerHTML를 한번만 실행하게 한다.
+  let isInitialize = false;
 
   this.state = initialState;
 
@@ -19,11 +22,15 @@ export default function Editor({
     this.render();
   };
   this.render = () => {
-    $editor.innerHTML = `
+    if (!isInitialize) {
+      $editor.innerHTML = `
       <input type="text" name="title" style="width: 600px;" value="${this.state.title}"/>
       <textarea name="content" style="width:600px;height: 400px;">${this.state.content}</textarea>
     `;
+      isInitialize = true;
+    }
   };
+
   this.render();
 
   $editor.addEventListener('keyup', (e) => {
@@ -38,7 +45,8 @@ export default function Editor({
         ...this.state,
         [name]: target.value, // key 부분을 이렇게 변수로 둘 수 있다.
       };
-      console.log(nextState);
+      this.setState(nextState);
+      onEditing(this.state);
     }
   });
 }
