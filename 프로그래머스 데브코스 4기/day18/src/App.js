@@ -26,8 +26,9 @@ export default function App({ $target }) {
   this.route = () => {
     $target.innerHTML = ''; // 비워주지 않으면 항목을 클릭하면 목록 아래에 해당 posts가 렌더링된다.
     const { pathname } = window.location;
+
     if (pathname === '/') {
-      postsPage.render();
+      postsPage.setState();
     } else if (pathname.indexOf('/posts/') === 0) {
       // 이게 이렇게 index로 되나?
       const [, , postId] = pathname.split('/');

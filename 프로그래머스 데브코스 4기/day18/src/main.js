@@ -1,3 +1,5 @@
+// main.js 역할 : App 생성하는 역할
+
 import PostEditPage from './PostEditPage.js';
 import App from './App.js';
 import Editor from './Editor.js';

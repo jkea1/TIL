@@ -19,16 +19,13 @@ export default function PostsPage({ $target }) {
     },
   });
 
-  const fetchPosts = async () => {
-    const posts = await request('./posts', {
-      method: 'GET',
-    });
-
+  this.setState = async () => {
+    const posts = await request('/posts');
     postList.setState(posts);
+    this.render();
   };
 
   this.render = async () => {
-    await fetchPosts();
     $target.appendChild($page);
   };
 }

@@ -1,3 +1,4 @@
+// 로컬 스토리지에서 임시로 넣어둔 값이 있는지 체크 + editor 만들기
 import { request } from './api.js';
 import Editor from './Editor.js';
 import { push } from './router.js';
@@ -53,7 +54,7 @@ export default function PostEditPage({ $target, initialState }) {
           });
           removeItem(postLocalSaveKey);
         }
-      }, 3000);
+      }, 2000); // 2초 동안 편집이 일어나지 않는다면 로컬스토리지에 저장하고 db에 넣는다.
     },
   });
 
@@ -61,6 +62,7 @@ export default function PostEditPage({ $target, initialState }) {
     if (this.state.postId !== nextState.postId) {
       postLocalSaveKey = `temp-post-${nextState.postId}`;
       this.state = nextState; // 이거 안 넣더니 post가 비어 있네
+
       if (this.state.postId === 'new') {
         const post = getItem(postLocalSaveKey, {
           title: '',
