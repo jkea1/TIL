@@ -15,3 +15,7 @@ export const setItem = (key, value) => {
   // 저장할때는 JSON.stringigy()로 넣는다.
   storage.setItem(key, JSON.stringify(value));
 };
+
+export const removeItem = (key) => {
+  storage.removeItem(key);
+};
