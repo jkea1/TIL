@@ -5,6 +5,25 @@ export default function PhotoList({ target, initialState, onScrollEnded }) {
 
   this.state = initialState;
 
+  const observer = new IntersectionObserver(
+    (entries) => {
+      // observe 할 대상을 어러개 지정할 수 있다.
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !this.state.isLoading) {
+          console.log("화면 끝", entry);
+          if (this.state.totalCount > this.state.photos.length) {
+            onScrollEnded();
+          }
+        }
+      });
+    },
+    {
+      threshold: 0.5, // 이미지가 절반 정도 보여졌을때 호출된다.
+    }
+  );
+
+  let lastLi = null;
+
   this.setState = (nextState) => {
     this.state = nextState;
     this.render();
@@ -23,8 +42,6 @@ export default function PhotoList({ target, initialState, onScrollEnded }) {
 
     const photosEl = photoList.querySelector(".PhotoList__photos"); // ul
 
-    console.log(photos);
-
     photos.forEach((photo) => {
       // console.log(photosEl.querySelector(`li[data-id="${photo.id}"]`));
       // photo의 id 기준으로 렌더링이 되어있는지 체크
@@ -33,12 +50,24 @@ export default function PhotoList({ target, initialState, onScrollEnded }) {
         // 없으면 li 생성하고 photos에 appendChild
         const li = document.createElement("li");
         li.setAttribute("data-id", photo.id);
-        li.style = "list-style: none";
+        li.style = "list-style: none; min-height: 800px";
         li.innerHTML = `<img width="100%" src= "${photo.imagePath}"/>`;
 
         photosEl.appendChild(li);
       }
     });
+
+    const nextLi = photosEl.querySelector("li:last-child");
+
+    if (nextLi !== null) {
+      // 이전에 감시하고 있던 값을 뺴고 갱신해준다.
+      // 여기 말고 observer 안에서 시작할때 시작할때 넣어줘도 된다.
+      if (lastLi !== null) {
+        observer.unobserve(lastLi);
+      }
+      lastLi = nextLi;
+      observer.observe(lastLi); // 마지막 li를 감시하는 역할을 한다.
+    }
   };
 
   this.render();
