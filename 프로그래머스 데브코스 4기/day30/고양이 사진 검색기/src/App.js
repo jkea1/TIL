@@ -1,6 +1,7 @@
 import Header from "./Header.js";
 import debounce from "./debounce.js";
 import { request } from "./api.js";
+import storage from "./storage.js";
 import SuggestKeywords from "./SuggestKeywords.js";
 import SearchResults from "./SearchResults.js";
 
@@ -10,6 +11,8 @@ export default function App({ target }) {
     keywords: [],
     catImages: [],
   };
+
+  this.cache = storage.getItem("keywords_cache", {});
 
   this.setState = (nextState) => {
     this.state = nextState;
@@ -30,9 +33,17 @@ export default function App({ target }) {
     initialState: {
       keyword: this.state.keyword,
     },
+    // 캐시에 값이 있으면 keywords를 꺼내고 없으면 업데이트 한 다음에 캐시를 업데이트 한다.
     onKeywordInput: debounce(async (keyword) => {
       if (keyword.trim().length > 1) {
-        const keywords = await request(`/keywords?q=${keyword}`);
+        let keywords = null;
+        if (this.cache[keyword]) {
+          keywords = this.cache[keyword];
+        } else {
+          keywords = await request(`/keywords?q=${keyword}`);
+          this.cache[keyword] = keywords;
+          storage.setItem("keywords_cache", this.cache);
+        }
 
         this.setState({
           ...this.state,
