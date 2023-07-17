@@ -1,13 +1,52 @@
 import TodoList from "./TodoList.js";
 import { request } from "./api.js";
-import TaskManager from "./TaskManager.js";
+import SyncTaskManager from "./SyncTaskManager.js";
 
 export default function App({ target }) {
-  const tasks = new TaskManager();
+  const tasks = new SyncTaskManager();
 
   // 이 App의 state 모양
   this.state = {
     todos: [],
+  };
+
+  const handleTodoDrop = async (todoId, updateValue) => {
+    console.log(`완료처리된 Todo에서 ${todoId}가 넘어옴!`);
+    const nextTodos = [...this.state.todos];
+    const todoIndex = nextTodos.findIndex((todo) => todo._id === todoId);
+
+    nextTodos[todoIndex].isCompleted = updateValue;
+
+    this.setState({
+      ...this.state,
+      todos: nextTodos,
+    });
+
+    // tasks.addTask(async () => {
+    //   await request(`/${todoId}/toggle`, {
+    //     method: "PUT",
+    //   });
+    // });
+
+    tasks.addTask({
+      url: `/${todoId}/toggle`,
+      method: "PUT",
+    });
+  };
+
+  const handleTodoRemove = (todoId) => {
+    const nextTodos = [...this.state.todos];
+
+    const todoIndex = nextTodos.findIndex((todo) => todo._id === todoId);
+
+    nextTodos.splice(todoIndex, 1);
+
+    this.setState({
+      ...this.state,
+      todos: nextTodos,
+    });
+
+    tasks.addTask({});
   };
 
   const incompletedTodoList = new TodoList({
@@ -16,25 +55,7 @@ export default function App({ target }) {
       title: "완료되지 않은 일들",
       todos: [],
     },
-    onDrop: async (todoId) => {
-      console.log(`완료처리된 Todo에서 ${todoId}가 넘어옴!`);
-
-      const nextTodos = [...this.state.todos];
-      const todoIndex = nextTodos.findIndex((todo) => todo._id === todoId);
-
-      nextTodos[todoIndex].isCompleted = false;
-
-      this.setState({
-        ...this.state,
-        todos: nextTodos,
-      });
-
-      tasks.addTask(async () => {
-        await request(`/${todoId}/toggle`, {
-          method: "PUT",
-        });
-      });
-    },
+    onDrop: (todoId) => handleTodoDrop(todoId, false),
   });
   const completedTodoList = new TodoList({
     target,
@@ -42,24 +63,7 @@ export default function App({ target }) {
       title: "완료된 일들",
       todos: [],
     },
-    onDrop: async (todoId) => {
-      console.log(`미완료처리된 Todo에서 ${todoId}가 넘어옴!`);
-
-      const nextTodos = [...this.state.todos];
-      const todoIndex = nextTodos.findIndex((todo) => todo._id === todoId);
-
-      nextTodos[todoIndex].isCompleted = true;
-      this.setState({
-        ...this.state,
-        todos: nextTodos,
-      });
-
-      tasks.addTask(async () => {
-        await request(`/${todoId}/toggle`, {
-          method: "PUT",
-        });
-      });
-    },
+    onDrop: (todoId) => handleTodoDrop(todoId, true),
   });
 
   this.setState = (nextState) => {
