@@ -146,4 +146,73 @@ function join(a: string, b: string = ''): string {
   return a+b
 }
 join('Hello', 'World')
-join('Good')
+join('Good') // b는 빈 문자 데이터가 사용된다. 
+
+// 타입 단언
+// 주저하지 아니하고 딱 잘라 말함.
+// as, ! (Non-null 단언 연산자)
+
+// 1)
+const btn = document.querySelector('button') as HTMLButtonElement // 선언하는 부분에서 단언할 수도 있다. 
+(btn as HTMLButtonElement).classList.add('btn') // 단언(개발자가 ts에게)하면 에러가 안난다. 
+btn.id = 'abc'
+
+
+//!
+const btn = document.querySelector('button')!
+
+// 2) 타입 단언
+
+// 타입가드 추가
+function isNum(val: unknown): val is number {
+  return typeof val === 'number'
+}
+
+function toTwoDecimals(val: number | string, isNum: boolean) {
+  if(isNum) {
+    (val as number).toFixed(2) // 소수점 자리 자르기 
+  } else {
+    (val as string).slice(0, 2)
+  }
+}
+
+const json = '{"name": "Heropy", "age": 85}'
+const user = JSON.parse(json) as {name: string, age: number}
+console.log(user.email);
+
+// 4)
+let num: number = 123;
+// ! = 변수 초기화 키워드
+// let num!: number
+console.log(num);
+
+// 타입 가드(Guard)
+// 타입 추론이 가능한 특정 범위(scope) 안에서 타입을 보장
+// typeof, instanceof, in
+
+const btn = document.querySelector('button')
+if(btn) { // btn instanceof HTMLButtonElement
+  btn.classList.add('btn')
+  btn.id = 'abc'
+}
+
+//
+fetch('https//exam.site')
+  .then(res => res.json)
+  .then((user: UserA | UserB) => { // then을 통해 받아온 데이터를 user라는 데이터에 담았다. 
+    console.log(user.name[0]);
+    console.log(user.age - 10);
+  })
+
+
+// 타입 별칭(Alias)
+// 새로운 타입 조합 생성
+// 대문자 조합으로 이름 지어야 한다. 
+
+type MyTypeName = string | number
+type MyArray = MyTypeName[]
+type UserB = {
+  isValid: boolean
+}
+type UserX = UserA & UserB
+
