@@ -216,3 +216,118 @@ type UserB = {
 }
 type UserX = UserA & UserB
 
+// 인터페이스(interface)
+// 개체(객체, 배열, 함수, 클래스)를 정의하는 타입
+// ? , readonly
+// 객체 타입을 정의할때는 interface를 사용하는 것이 좋다. 
+
+// 타입을 지정할때는 쉼표나 세미콜론 없어도 된다. 
+
+type UserT = { 
+  name: string
+  readonly age: number // 읽기만 가능하고 쓰기는 안된다. 
+  isValid?: boolean // 이 속성은 필수는 아니다. 
+}
+
+interface UserI { // 할당 연산자(=)가 없다. 
+  name: string
+  age: number
+  isValid?: boolean // 필수는 아니다. 
+}
+
+const user: UserI = { 
+  name: 'Heropy'
+  age: 85
+}
+
+// 인터페이스에서 함수 타입 호출하기
+// 호출 시그니쳐 Call signature
+
+interface User {
+  name: string
+  age?: number
+}
+
+type GetUserNameT = (u: User) => string
+interface GetUserNameI {
+  (u: User): string
+}
+const user: User = {
+  name: 'Heropy'
+}
+
+const getUserName: GetUserNameI = (user: User) => user.name
+const username = getUserName(user)
+console.log(username);
+
+// 인터페이스
+// 클래스 - 생성(구문) 시그니쳐(construct signature)
+
+interface UserI {
+  name: string
+  getName():  // 객체내의 메서드 이다. 
+}
+class User implements UserI { // 클래스에 type을 지정할때는 implements 키워드를 사용한다.
+  public name // 공개 되어져 있는 속성이다. 
+  constructor(name: string) {
+    this.name = name
+  }
+  getName() {
+    return this.name
+  }
+}
+
+const user = new User('Heropy')
+user.getName() //'Heropy'
+
+function hello(userClass: UserI, msg: string) {
+  const user = new userClass('Heropy')
+  return `hello ${user.getName()}, ${msg}`
+}
+hello(User, 'good morning!')
+
+//인터페이스
+// 인덱싱 가능 - 인덱스 시그니쳐(index signiture)
+// 타입 인덱싱
+
+interface User {
+  name: string
+  age: number
+}
+const a: User['name'] = 'Neo'
+const b: User['age'] = 123
+
+// 인터페이스 확장
+
+interface UserA {
+  name: string
+  age: number
+}
+
+interface UserB extends UserA { // 확장 가능하다. 
+  isValid: boolean
+}
+
+const user: UserB = {
+  name: 'ea'
+  age: 85,
+  isValid: true
+}
+
+// 함수의 명시적 this 타입
+
+function greet(this: User, msg: string) {
+  return `Hello ${this.name}, ${msg}`
+}
+
+const heropy = {
+  name: 'ea'
+  greet
+}
+heropy.greet('good morning~')
+
+const neo = {
+  name: 'Neo'
+}
+
+greet.call(neo, 'Have a great day')

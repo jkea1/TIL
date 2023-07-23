@@ -2,7 +2,8 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES2015",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "experimentalDecorators": true
   },
   "include": ["./src/**/*.ts"]
 }
