@@ -331,3 +331,116 @@ const neo = {
 }
 
 greet.call(neo, 'Have a great day')
+
+// 함수 오버로딩
+
+// 함수 오버로딩을 메서드로 사용할 수 있다. 
+
+// 클래스의 접근 제어자
+
+// 접근 제어자
+// public 생략가능
+// protected
+// private
+
+// 추상 클래스(단일 관계) vs 인터페이스(다중 관계)
+// 추상 abstract 클래스 -> 타입선언과 구현부를 같이 표현할 수 있다. 
+// 상황에 맞게 사용하자
+
+//데코레이터
+// 클래스에서 사용하는 특별한 종류의 선언
+// 클래스에 추가기능을 붙이거나 클래스의 기능을 변경할 수 도 있다. 
+// 사용
+// 1. 클래스 자체에 쓸 수 있다. 
+
+// 제네릭(generic)
+function toObj(a: string | number | boolean, b: string | number | boolean): { a: string | number | boolean, b: string | number | boolean } {
+  return {a, b}
+} 
+// 위 처럼하면 너무 길다. 
+// 제네릭을 사용하면 간단하게 가능하다. 
+function toObj<T>(a: T, b: T): { a: T, b: T} {
+  return {a, b}
+} 
+
+toObj<string>('A', 'B') //string이 -> T로 들어간다. 
+toObj<number>(1, 2)
+toObj<boolean>(true, false)
+toObj('A', 12) // 앞에 a부분에서 string이면 뒷부분 타입도 모두 string으로 지정된다. 
+
+// 제약조건 추가도 가능하다. 
+// string, number, boolean 셋중 하나여야 한다는 제약이 걸렸다. 
+function toObject<T extends string | number | boolean>(a: T, b: T): { a: T, b: T} {
+  return {a, b}
+} 
+
+toObject(null, null) // 타입이 셋중 하나가 아닌 null 이므로 에러가 뜬다. 
+
+// 인터페이스 안에서도 제네릭 문법을 쓰는게 가능하다. 
+interface ToObj<T> { // 재사용이 가능하다. 
+  a: T
+  b: T
+}
+
+function toObj<T extends string | number | boolean>(a: T, b: T): ToObj<T> { // 타임을 매개변수로 넣어주는 것이 가능하다. 
+  return {a, b}
+}
+
+toObj('A', 'B')
+toObj(1, 2)
+toObj(true, false)
+toObj(null, null)
+
+//제네릭 예제
+interface User<T, U, V> {
+  name: T, 
+  age: U,
+  isValid: V
+}
+
+const heropy: User<string, number, boolean> = {name: 'heropy', age: 85, isValid: true}
+const neo: User<string, number, boolean> = {name: 'neo', age: 22, isValid: false}
+const amy: User<string, number, boolean> = {name: 'amy', age: 65, isValid: true}
+
+type Users<T, U, V> = {name: T, age: U, isValid: V} | [T, U, V]
+type U = User<string, number, boolean>
+
+const evan: U = {'Evan', 34, false}
+const lewis: U = {'Lewis', 14, true}
+const leon: U = {'JS', 66, false}
+
+// 클래스에서 제네릭을 사용하는 예제
+class Basket<T> {
+  public items: T[]
+  constructor(...rest: T[]) {
+    this.items = rest
+  }
+  putItem(item: T) {
+    this.items.unshift(item)
+  }
+  takeOutItems(count: number) {
+    return this.items.splice(0, count)
+  }
+}
+
+const fruitBasket = new Basket('Apple', 'Banana', 'Cherry')
+fruitBasket.putItem('Orange')
+const fruits = fruitsBasket.takeOutItems(2)
+console.log(fruits); // ['Orange', 'Apple']
+console.log(fruitsBasket.items); // ['Banana', 'Cherry']
+
+// 제너릭
+// 조건부 타입(conditional types)
+
+type MyType<T> = T extends string | number ? boolean : never
+
+const a: MyType<string> = true
+const b: MyType<number> = true
+const c: MyType<null> = true
+
+//유틸리티 타입으로 만들 수 있다. 
+
+// type MyExclude<T, U> = T extends U ? never : T
+type MyUnion = string | number | boolean | null
+const a: Exclude<MyUnion, boolean | null> = false
+
