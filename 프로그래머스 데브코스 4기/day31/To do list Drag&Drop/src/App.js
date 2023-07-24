@@ -46,7 +46,11 @@ export default function App({ target }) {
       todos: nextTodos,
     });
 
-    tasks.addTask({});
+    tasks.removeTasks(`/${todoId}`);
+    tasks.addTask({
+      url: `/${todoId}`,
+      method: "DELETE",
+    });
   };
 
   const incompletedTodoList = new TodoList({
@@ -56,6 +60,7 @@ export default function App({ target }) {
       todos: [],
     },
     onDrop: (todoId) => handleTodoDrop(todoId, false),
+    onRemove: handleTodoRemove,
   });
   const completedTodoList = new TodoList({
     target,
@@ -64,6 +69,7 @@ export default function App({ target }) {
       todos: [],
     },
     onDrop: (todoId) => handleTodoDrop(todoId, true),
+    onRemove: handleTodoRemove,
   });
 
   this.setState = (nextState) => {

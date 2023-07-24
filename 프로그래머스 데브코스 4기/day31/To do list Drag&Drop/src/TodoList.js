@@ -57,8 +57,8 @@ export default function TodoList({ target, initialState, onDrop, onRemove }) {
     if (e.target.tagName === "BUTTON") {
       const li = e.target.closest("li");
 
-      if ($li) {
-        onRemove($li.dataset.id);
+      if (li) {
+        onRemove(li.dataset.id);
       }
     }
   });

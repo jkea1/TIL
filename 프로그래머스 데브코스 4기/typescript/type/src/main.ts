@@ -444,3 +444,14 @@ const c: MyType<null> = true
 type MyUnion = string | number | boolean | null
 const a: Exclude<MyUnion, boolean | null> = false
 
+// 제네릭
+// 조건부 타입 - infer
+// 타입 변수를 추론할때 사용가능하다. 
+
+type ArrayItemType<T> = T extends (infer I) [] ? I : never
+
+const numbers = [1, 2, 3]
+const a: ArrayItemType<typeof numbers> = 123
+const b: ArrayItemType<boolean> = 123
+
+
