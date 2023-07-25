@@ -1,0 +1,11 @@
+{
+  "complierOptions": {
+    "strick": true,
+    "target": "ES2015",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts", "types/**/*.ts"]
+}
