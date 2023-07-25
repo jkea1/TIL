@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <style>
+    .orange {
+      color: orange;
+    }
+  </style>
+  <div id="app">
+    <div v-bind:class="{ orange: active }">{{ counter }}</div> <!-- class orange는 active라는 값에 영향을 받아서 출력된다. -->
+    <button v-on:click="increase">Click me!</button>
+  </div>
+  <script>
+    const App = {
+      data() {
+        return {
+          counter: 0,
+          active: false
+        }
+      },
+      methods: {
+        increase() {
+          this.counter += 1;
+        }
+      }
+    }
+
+    const app = Vue.createApp(App).mount('#app'); // 실행되고 반환되는 데이터를 app이라는 전역 변수에 담았다. 
+    console.log(app); // target 부분에 들어가 보면 counter도 들어가 있다. 
+  </script>
+</body>
+
+</html>
