@@ -11,21 +11,27 @@
 
 <body>
   <div id="app">
-    <div v-if="active">Hello Vue!</div> <!-- v-if를 통해 active를 연결했다. active가 true면 Hello view를 보여준다. -->
-    <button v-on:click="toggle">Toggle</button>
+    <ul>
+      <fruit-item v-for="name in fruits" v-bind:fruit-name="name"></fruit-item> <!-- 컴포넌트를 반복사용가능하다.  -->
+    </ul>
   </div>
   <script>
+    const FruitItem = { // FruitItem 이라는 컴포넌트를 만들어 주고 App의 components에 등록해줬다. 
+      template: '<li>{{ fruitName }}</li>',
+      props: ['fruitName']
+    }
+
     const App = {
+      components: {
+        FruitItem: FruitItem //FruitItem 으로 생략가능하다. 
+      },
       data() {
-        return { // 객체를 return 해 준다. 
-          active: false
+        return {
+          fruits: [
+            'Apple', 'Banana', 'Cherry'
+          ]
         }
       },
-      methods: {
-        toggle() {
-          this.active = !this.active; // 재할당
-        }
-      }
     }
     Vue.createApp(App).mount('#app')
   </script>
