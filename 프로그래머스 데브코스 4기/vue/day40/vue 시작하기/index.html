@@ -10,32 +10,24 @@
 </head>
 
 <body>
-  <style>
-    .orange {
-      color: orange;
-    }
-  </style>
   <div id="app">
-    <div v-bind:class="{ orange: active }">{{ counter }}</div> <!-- class orange는 active라는 값에 영향을 받아서 출력된다. -->
-    <button v-on:click="increase">Click me!</button>
+    <div v-if="active">Hello Vue!</div> <!-- v-if를 통해 active를 연결했다. active가 true면 Hello view를 보여준다. -->
+    <button v-on:click="toggle">Toggle</button>
   </div>
   <script>
     const App = {
       data() {
-        return {
-          counter: 0,
+        return { // 객체를 return 해 준다. 
           active: false
         }
       },
       methods: {
-        increase() {
-          this.counter += 1;
+        toggle() {
+          this.active = !this.active; // 재할당
         }
       }
     }
-
-    const app = Vue.createApp(App).mount('#app'); // 실행되고 반환되는 데이터를 app이라는 전역 변수에 담았다. 
-    console.log(app); // target 부분에 들어가 보면 counter도 들어가 있다. 
+    Vue.createApp(App).mount('#app')
   </script>
 </body>
 
