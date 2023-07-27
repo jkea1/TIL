@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ msg }}</h1>
+  </div>
+
+  <script>
+    const App = { // createApp의 옵션 부분을 상수로 빼주었다. 
+      data() {
+        return {
+          msg: 'Hello Vue!'
+        }
+      }
+    }
+    // msg라는 데이터를 가지고 있는 vue.js 에플리케이션1
+    const vm = Vue.createApp(App).mount('#app')
+  </script>
+</body>
+
+</html>
