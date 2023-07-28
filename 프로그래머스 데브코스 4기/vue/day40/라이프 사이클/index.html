@@ -20,29 +20,11 @@
           msg: 'Hello Vue!'
         }
       },
-      beforeCreate() { // vue app이 만들어 지기 직전에 실행이 된다. 
-        // beforeCreate만 this를 통해 데이터를 다룰 수 없다. 
-        // createApp() 으로 app을 생성하기 직전이므로!
-        // 그래서 beforeCreate는 거의 사용하지 않는다. 
-        console.log('before create!', this.msg);
-        console.log(document.querySelector('h1'));
+      bdforeUpdated() {
+        console.log('화면이 업데이트 전', this.msg)
       },
-      created() {
-        // 만들어진 직후에 
-        // this로 data를 이용가능하다.
-        // html과 연결이 된 상태는 아니므로 html을 다루는 코드는 작성이 안된다. 
-        console.log('created!', this.msg);
-        console.log(document.querySelector('h1'));
-      },
-      beforeMount() {  //html 구조와 연결되기 직전
-        console.log('beforeMount!', this.msg);
-        console.log(document.querySelector('h1'));
-      },
-      mounted() {
-        // html 구조와 연결된 직후 
-        // 유일하게 DOM API를 다룰 수 있다. 
-        console.log('mounted!', this.msg);
-        console.log(document.querySelector('h1')); // DOM과 연결이 된 직후인 mounted() 후에만 값을 가져 올 수 있다.  
+      updated() {
+        console.log('화면이 업데이트 됨', this.msg)
       }
     }
     const app = Vue.createApp(App)
