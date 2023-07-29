@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-bind</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <style>
+    .active {
+      color: dodgerblue;
+    }
+  </style>
+  <div id="app">
+    <h1 v-bind:class="name">Hello Vue!</h1>
+    <input type="text" value="Hello Vue!" v-bind:disabled="disabled">
+    <h1>{{ count + 2 }}</h1>
+  </div>
+  <script>
+    const App = {
+      data() {
+        return {
+          name: 'active',
+          disabled: null,  // 빈 객체 데이터는 {} truthy 이다. 
+          count: 0
+        }
+      }
+    }
+    const vm = Vue.createApp(App).mount('#app')
+  </script>
+</body>
+
+</html>

