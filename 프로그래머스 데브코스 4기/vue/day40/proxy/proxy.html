@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const app = {
+      data() { // 데이터를 함수로 만들어야 한다. 
+        count: 0
+      }
+    }
+    // 인수 2개를 받는다. target, handler
+    const proxyA = new Proxy(app.data(), {
+      get(target, key) { // 프록시 인스턴스의 속성에 조회하려고 할때 동작한다. 
+        return target[key];
+      },
+      set(target, key, value) { // 프록시 인스턴의 값을 지정하려고 할때 동작한다. 
+        target[key] = value * 2;
+      },
+    })
+
+    // 인수 2개를 받는다. target, handler
+    const proxyB = new Proxy(app.data(), {
+      get(target, key) { // 프록시 인스턴스의 속성에 조회하려고 할때 동작한다. 
+        return target[key];
+      },
+      set(target, key, value) { // 프록시 인스턴의 값을 지정하려고 할때 동작한다. 
+        target[key] = value * 2;
+      },
+    })
+  </script>
+</body>
+
+</html>
