@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ user.name }}</h1>
+    <h1>{{ upperName }}</h1>
+    <h1>{{ user.age }}</h1>
+    <h2>{{ doubleAge }}</h2>
+  </div>
+  <script>
+    const App = {
+      data() {
+        return {
+          user: { // user 라는 객체 데이터
+            name: 'Leon',
+            age: 22,
+            email: 'ea@ea.com'
+          }
+        }
+      },
+      computed: {
+        doubleAge() {
+          return this.user.age * 2;
+        },
+        upperName() {
+          return this.user.name.toUpperCase();
+        }
+      }
+    }
+    const vm = Vue.createApp(App).mount('#app');
+  </script>
+</body>
+
+</html>

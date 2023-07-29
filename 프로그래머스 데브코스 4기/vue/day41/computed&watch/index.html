@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ count }}</h1>
+    <h2>{{ double }}</h2>
+    <h2>{{ double }}</h2>
+    <h2>{{ double }}</h2>
+    <h2>{{ double }}</h2>
+  </div>
+  <script>
+    // 컴포넌트
+    const App = {
+      data() {
+        return {
+          count: 3
+        }
+      },
+      computed: { // 하나의 데이터 처럼 사용가능하다. 
+        double() {
+          return this.count * 2; // 값이 캐싱된다. 
+        }
+      },
+      // methods: { // {{ double() }} 로 사용도 가능하다. 
+      //   double() {
+      //     return this.count * 2;
+      //   }
+      // }
+    }
+
+    const vm = Vue.createApp(App).mount('#app');
+  </script>
+</body>
+
+</html>

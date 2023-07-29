@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ fullName }}</h1>
+  </div>
+  <script>
+    const App = {
+      data() {
+        return {
+          firstName: 'Leon',
+          lastName: 'Miler'
+        }
+      },
+      computed: { // 계산된 데이터를 처리해 주는 옵션
+        fullName: {
+          get() { // getter
+            return `${this.firstName} ${this.lastName}`;
+          },
+          set(newValue) { // setter
+            console.log(newValue);
+            const names = newValue.split(' ');
+            this.firstName = names[0];
+            this.lastName = names[names.length - 1];
+          }
+        }
+        // fullName() { // getter 방식이다. 
+        //   console.log(this);
+        //   return `${this.firstName} ${this.lastName}`;
+        // }
+      },
+      watch: { // 반응형 데이터(firstName, lastName, fullName)를 감시해서 반응형 데이터가 바뀌면 watch 내의 함수가 동작한다. 
+        firstName(newValue, oldValue) { // 반응형 데이터 firstName을 주시하고 있는 함수이다. 
+          console.log('watch', this.firstName)
+        },
+        fullName() { // fullName이 firstName에 의존적이기 때문에 firstName만 바껴도 fullName()이 실행된다. 
+          console.log('watch', this.fullName)
+        }
+
+      }
+    }
+
+    const vm = Vue.createApp(App).mount('#app')
+  </script>
+</body>
+
+</html>

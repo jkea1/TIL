@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="capitalize">Capitalize</button>
+    <ul>
+      <li v-for="fruit in fruits">{{ fruit.name }}</li>
+    </ul>
+  </div>
+  <script>
+    const App = {
+      data() {
+        return {
+          user: {
+            name: 'Leon',
+            age: 22,
+          },
+          fruits: [
+            { id: 1, name: 'Apple' },
+            { id: 2, name: 'Banana' },
+            { id: 3, name: 'Cherry' }
+          ]
+        }
+      },
+      watch: { // 옵션을 주는 방법이다. -> user를 객체 데이터로 만든다. 
+        user: { // 이름 user 여야 한다. 
+          handler(newV, oldV) {
+            console.log(newV, oldV)
+          },
+          deep: true // user 라는 참조형 데이터를 더 깊게 감시한다는 의미이다. user의 name이 바껴도 user가 바꼈다고 인식해 준다.  
+        },
+        fruits: {
+          handler() { // 핸드러를 써서 깊게 감시 가능한 형태로 만들어 준다. 
+            console.log(this.fruits)
+          },
+          deep: true,
+          immediate: true, // 데이터가 변경됐을때 뿐만 아니라 초기화 됐을때도 실행된다. 
+        }
+      },
+      methods: {
+        capitalize() {
+          this.fruits.forEach((fruit) => {
+            fruit.name = fruit.name.toUpperCase()
+          })
+        }
+      }
+    }
+
+    const vm = Vue.createApp(App).mount('#app')
+  </script>
+</body>
+
+</html>
