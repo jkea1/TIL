@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <style>
+    .title {
+      font-size: 60px;
+      color: dodgerblue;
+    }
+
+    .active {
+      color: red;
+    }
+
+    .title--small {
+      /** BEM */
+      font-size: 40px;
+    }
+
+    .color--orange {
+      color: orangered;
+    }
+  </style>
+  <div id="app">
+    <button @click="toggle">Toggle</button>
+    <h1 :class="styleObject" class="title">{{ msg }}</h1>
+  </div>
+  <script>
+    const App = {
+      data() {
+        return {
+          msg: 'Hello Vue!',
+          active: false,
+          small: true,
+        }
+      },
+      computed: { // 의존한는 데이터에 기반하여 동적으로 값을 계산하고 반환하는데 사용된다. 
+        styleObject() {
+          return {
+            active: this.active,
+            'title--small color--orange': this.small,
+          }
+        }
+      },
+      methods: {
+        toggle() {
+          this.active = !this.active
+        }
+      }
+    }
+    const vm = Vue.createApp(App).mount('#app');
+  </script>
+</body>
+
+</html>

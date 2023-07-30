@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1 :class="[active, title]" @click="changeTitle">Hello Vue!</h1>
+  </div>
+  <script>
+    const App = {
+      data() {
+        return {
+          active: 'active',
+          title: 'title'
+        }
+      },
+      methods: {
+        changeTitle() {
+          this.title = 'title--large'
+        }
+      }
+    }
+    const vm = Vue.createApp(App).mount('#app')
+  </script>
+</body>
+
+</html>
