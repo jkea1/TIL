@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <form @submit.prevent="addNewTodo">
+      <label for="new-todo">Add a todo</label> <!-- label은 for속성에 입력양식의 id 값을 적어 input에 연결할 수 있다.  -->
+      <input v-model="newTodoText" id="new-todo" type="text" placeholder="E.g Feed ths cat">
+      <button>Add</button>
+    </form>
+    <ul>
+      <todo-item v-for="todo in todos" :key="todo.id" :todo="todo" @remove="removeTodo" />
+    </ul>
+  </div>
+  <script>
+    function generateId() {
+      return `${Date.now()}${Math.random()}`
+    }
+    const TodoItem = {
+      template: `
+        <li>
+          {{ todo.title }}
+          <button @click="$emit('remove', todo.id)">Remove</button>  
+        </li>
+      `,
+      props: ['todo']
+    }
+    const App = {
+      components: {
+        TodoItem
+      },
+      data() {
+        return {
+          newTodoText: '',
+          todos: []
+        }
+      },
+      methods: {
+        addNewTodo(e) {
+          e.preventDefault();
+          this.todos.push({
+            id: generateId(), /** id는 각각의 item이 고유하다는 것을 증명한다. */
+            title: this.newTodoText
+          })
+          this.newTodoText = '';
+          console.log(this.todos);
+        },
+        removeTodo(todoId) {
+          console.log(todoId)
+          this.todos = this.todos.filter((todo) => todo.id !== todoId)
+        }
+      }
+    }
+    const vm = Vue.createApp(App).mount('#app')
+  </script>
+</body>
+
+</html>
