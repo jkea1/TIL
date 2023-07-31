@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <style>
+    .parent {
+      width: 200px;
+      height: 200px;
+      border: 4px solid;
+      overflow: auto;
+      /** 넘치는 요소가 있다면 스크롤을 통해 보여준게 한다.  */
+    }
+
+    .child {
+      font-size: 100px;
+    }
+  </style>
+  <div id="app">
+    <div class="parent" @wheel="log">
+      <div v-for="number in 15" class="child">{{ number }}</div>
+    </div>
+  </div>
+  <script>
+    const App = {
+      methods: {
+        log() {
+          console.log(i)
+        }
+      }
+    }
+    const vm = Vue.createApp(App).mount('#app')
+  </script>
+</body>
+
+</html>
