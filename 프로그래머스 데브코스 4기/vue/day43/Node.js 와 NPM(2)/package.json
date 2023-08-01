@@ -1,0 +1,19 @@
+{
+  "name": "node-npm",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.46.0",
+    "eslint-plugin-vue": "^9.16.1",
+    "serve": "^14.2.0"
+  },
+  "dependencies": {
+    "vue": "^3.2.36"
+  }
+}

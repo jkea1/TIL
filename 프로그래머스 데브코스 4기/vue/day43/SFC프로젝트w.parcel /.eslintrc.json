@@ -1,0 +1,7 @@
+{
+  "env": {
+    "browser": false,
+    "node": false
+  },
+  "extends": ["eslint:recommended", "plugin:vue/vue3-recommended"]
+}
