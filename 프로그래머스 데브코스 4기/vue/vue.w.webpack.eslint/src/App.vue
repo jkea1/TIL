@@ -1,23 +1,23 @@
 <template>
   <h1>
     {{ msg }}
-    <Hello />
   </h1>
+  <Hello />
 </template>
 
 <script>
-import Hello from "~/components/Hello";
+import Hello from '~/components/Hello'
 
 export default {
   components: {
-    Hello: Hello,
+    Hello
   },
   data() {
     return {
-      msg: "Hello Webpack!",
-    };
+      msg: 'Hello Webpack!',
+    }
   },
-};
+}
 </script>
 
 <style>

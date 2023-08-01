@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <upper-name v-for="fruit in fruits" :key="fruit.id" :hello="fruit.name" @to-upper="toUpper(fruit, $event)">
+    </upper-name>
+  </div>
+  <script>
+    const App = {
+      data() {
+        return {
+          fruits: [
+            { id: '1', name: 'apple' },
+            { id: '2', name: 'banana' },
+            { id: '3', name: 'cherry' },
+          ]
+        }
+      },
+      methods: {
+        toUpper(fruit, upperName) {
+          console.log(fruit, upperName);
+          fruit.name = upperName;
+        }
+      }
+    }
+    const app = Vue.createApp(App);
+    app.component('upper-name', { // 전역에 등록
+      template: `<div @click="capitalize">{{hello}}</div>`,
+      props: ['hello'],
+      methods: {
+        capitalize() {
+          // this.hello = this.hello.toUpperCase()
+          this.$emit('to-upper', this.hello.toUpperCase())
+        }
+      }
+    })
+    const vm = app.mount('#app');
+
+  </script>
+</body>
+
+</html>
