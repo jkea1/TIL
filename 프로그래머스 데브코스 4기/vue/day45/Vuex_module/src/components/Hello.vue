@@ -3,7 +3,7 @@
 </template>
 
 <style scoped lang="scss">
-$color: rgb(43, 46, 45);
+$color: rgb(216, 203, 18);
 h1 {
   color: $color;
 }
