@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import AutoCounter from './components/AutoCounter'
 import Input from './components/Input'
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div>
       <Input ref={inputRef} />
       <button onClick={() => inputRef.current.focus()}>Focus</button>
+      <AutoCounter />
     </div>
   )
 }

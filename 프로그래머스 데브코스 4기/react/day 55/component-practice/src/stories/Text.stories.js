@@ -13,7 +13,6 @@ export default {
     block: { control: 'boolean' },
     paragraph: { control: 'boolean' },
     mark: { control: 'boolean' },
-    block: { control: 'boolean' },
     code: { control: 'boolean' },
   },
 }
