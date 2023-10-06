@@ -1,0 +1,31 @@
+.line-path {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+} 
+.chart-box {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(242, 241, 236);
+  border-radius: 2px;
+  margin: 3px
+  
+}
+.title {
+  margin: 9px 3px 4px 9px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.chart {
+  margin: 3px;
+  background-color: white;
+}

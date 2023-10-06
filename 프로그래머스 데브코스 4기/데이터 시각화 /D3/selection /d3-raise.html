@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <button onclick="raise()">Raise</button>
+  <svg class="raiseSVG" width="300" heigth="60">
+    <circle r="25" cx="30" cy="30" fill="lightblue" />
+    <circle class="pink" r="25" cx="90" cy="30" fill="pink" />
+    <circle class="violet" r="25" cx="150" cy="30" fill="violet" />
+    <circle r="25" cx="210" cy="30" fill="lightblue" />
+  </svg>
+</body>
+<script>
+  // selection.raise
+  // selection의 요소를 해당 부모의 마지막 자식으로 DOM에 다시 삽입한다. 
+
+  // selection.lower
+  // selection의 요소를 해당 부모의 첫번째 자식으로 DOM에 다시 삽입한다. 
+  function raise() {
+    d3.select('.raiseSVG')
+      .selectAll('.pink, .violet')
+      .raise();
+
+    d3.select('.raiseSVG')
+      .selectAll('circle')
+      .attr('cx', (d, i) => 30 + (i * 60))
+  }
+</script>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script type="module" src="main.js"></script>
+        <h3>BTS는 작곡/작사에 얼마나 참여할까 (~2020년)</h3>
+        <div class="row">
+          <div class="chart-box">
+            <div class="title">발매된 전체 곡 수</div>
+            <div class="chart" id="total-song-board"></div>
+          </div>
+          <div class="chart-box">
+            <div class="title">발매된 전체 앨범 수</div>
+            <div class="chart" id="total-album-board"></div>
+          </div>
+          <div class="chart-box">
+            <div class="title">BTS 작사 참여 비율</div>
+            <div class="chart" id="write-arc-chart"></div>
+          </div>
+          <div class="chart-box">
+            <div class="title">BTS 작곡 참여 비율</div>
+            <div class="chart" id="compose-arc-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="chart-box">
+            <div class="title">BTS 년도별 작곡/작사 횟수</div>
+            <div class="chart" id="bts-make-own-song-line-chart"></div>
+          </div>
+          <div class="chart-box">
+            <div class="title">BTS 멤버 년도별 작곡/작사 횟수</div>
+            <div class="chart" id="song-by-btsmembers-line-chart"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <div class="chart-box">
+              <div class="title">남자 아이돌 작사 비율</div>
+              <div class="chart" id="boyband-write-bar-chart"></div>
+            </div>
+            <div class="chart-box">
+              <div class="title">남자 아이돌 작곡 비율</div>
+              <div class="chart" id="boyband-compose-bar-chart"></div>
+            </div>
+          </div>
+          <div class="chart-box">
+            <div class="title">남자 아이돌 년도별 작곡/작사 횟수</div>
+            <div class="chart" id="boyband-make-own-song-line-chart"></div>
+          </div>
+        </div>
+    </body>
+</html>

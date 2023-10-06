@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+  function getNode() {
+    // selection.nodes()
+    // - 해당 selection의 모든 요소를 배열을 반환한다. 
+    // - Array.from(selection)
+
+    // selection.node()
+    // - 해당 selection의 첫 번째 요소를 반환한다. 
+    // - selection이 비어 있으면 null을 반환한다. 
+  }
+
+  const barRect = d3.select('#bargraph').selectAll('rect')
+  console.log(barRect.nodes())
+  console.log(barRect.node())
+</script>
+
+</html>

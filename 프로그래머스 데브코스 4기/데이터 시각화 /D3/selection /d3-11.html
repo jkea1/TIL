@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      display: inline-block;
+      color: white;
+      padding: 5px;
+    }
+
+    .pink-box {
+      background-color: pink;
+    }
+
+    .aqua-box {
+      background-color: lightblue
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <button onclick="cloneBoxes()">Clone</button>
+  <div id="cloneBoxes">
+    <div class="box pink-box"></div>
+    <div class="box pink-box"></div>
+    <div class="box pink-box"></div>
+  </div>
+</body>
+<script>
+  // selection.clone
+  // - selection.clone 메소드를 선택한 모든 요소를 복제하고, 선택한 요소 바로 뒤에 삽입한다.
+  // - 두번째 인자로 true를 전달하면, 선택한 요소의 모든 하위 노드들도 복제된다.
+  // - 반환할 땐 [선택한 기존 selection & 새로 복제 생성된 요소]를 반환한다. 
+  function cloneBoxes() {
+    d3.selectAll('#cloneBoxes div')
+      .clone(false)
+      .classed('box aqua-box', true)
+  }
+
+</script>
+
+</html>
