@@ -17,7 +17,7 @@ def binary_search(nums, target):
       print("found!", nums[mid])
       return 
   
-  print("no target in the list")
+  print("no target is in list")
   return 
 
 
