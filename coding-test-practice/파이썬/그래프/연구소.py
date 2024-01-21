@@ -25,9 +25,9 @@ board = [
 answer = 0
 
 def Solution(n, m, board):
-  virus, empty = [], []
 
   # 빈칸, 바이러스 위치 저장
+  virus, empty = [], []
   for r in range(n):
     for c in range(m):
       if board[r][c] == 0:
