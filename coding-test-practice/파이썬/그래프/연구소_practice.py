@@ -8,6 +8,7 @@ from collections import deque, Counter
 #   [1, 1, 1, 0, 0, 2],
 #   [0, 0, 0, 0, 0, 2]
 # ]
+
 answer = 0
 
 n, m = 7, 7
