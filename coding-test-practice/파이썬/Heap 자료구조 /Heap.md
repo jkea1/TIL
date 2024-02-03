@@ -45,13 +45,13 @@ heappush(a, 0)
 
 ### heapq.heappop() - heap의 원소 삭제
 
-heapq는 **min heap**으로 힙 자료구조를 만듭니다. 따라서 <code>heappop()</code> 을 사용하면, **제일 작은** 원소가 <code>pop</code>된다.
+heapq는 **min heap**으로 힙 자료구조를 만듭니다. 따라서 <code>heappop()</code> 을 사용하면, **제일 작은(우선 순위가 높은)** 원소가 <code>pop</code>된다. <code>pop</code> 후 에는 heap이 자동으로 재정렬된다.
 
 ### heap의 정의
 
 heap은 min heap과 max heapd으로 나누어져 있다. 각각의 정의는 아래와 같다.
 
-- min heap: 부모 노드의 값 <br 자식 노드 값 트리 형태의 자료구조
+- min heap: 부모 노드의 값 < 자식 노드의 값 트리 형태의 자료구조
 - max heap: 부모 노드의 값 > 자식 노드의 값 트리 형태의 자료구조
 
 **min heap**
@@ -63,13 +63,21 @@ heap은 min heap과 max heapd으로 나누어져 있다. 각각의 정의는 아
 - heap은 완전 이진 트리(Complete Binary Tree) 형식을 배열, 파이썬에서는 리스트 형태로 나타낸 것이다.
 - 즉, 자식 노드들은 <code>node.left</code>, <code>node.right</code>로 표현하는 것이 아니라, list의 index를 활용합니다. 부모노드가 <code>i</code> index라고 하면, 왼쪽 자식노드는 <code>2i+1</code>index에, 오른쪽 자식노드는 <code>2i+2</code>index에 위치한다.
 
-> ❗️ heap은 정렬이 완료된 자료구조가 아니다.
+</br>
+
+> ❗️
+> **heap은 정렬이 완료된 자료구조가 아니다.**
 > min heap으로 만들었을 때, a[0]은 항상 제일 작은 값이지만, 그 이후로부터는 알 수 없다.
 > max heap의 경우도 마찬가지로 a[0] 은 항상 가장 큰 값을 가지지만, a[1] 이 2번째로 큰 값이라고 확신할 수 없습니다.
 
+> ⭐️
+> min heap으로 구현했을 경우 list ➡︎ [1, 3, 2, 4, 5, 9, 6]
+> 오름차순도 아니기 때문에 list로 봤을때는 정렬이 안 된게 맞지만 부모 노드가 자식 노드들 보다 작다는 min heap 우선 순위 규칙을 잘 따르고 있기 때문에 우선 순위 큐를 위해 사용하는 것이 맞다.
+> <br /> <img src="./image/min_heap.png" /> <br />
+
 <br/>
 
-#### min heap을 구현하는 경우에는 list에 <code>heapify</code>를 이용하면 되지만, max heap을 구현하는 경우에는 아래와 같다.
+#### 👏 min heap을 구현하는 경우에는 list에 <code>heapify</code>를 이용하면 되지만, max heap을 구현하는 경우에는 아래와 같다.
 
 <br/>
 
