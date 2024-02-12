@@ -49,7 +49,7 @@ heapq는 **min heap**으로 힙 자료구조를 만듭니다. 따라서 <code>he
 
 ### heap의 정의
 
-heap은 min heap과 max heapd으로 나누어져 있다. 각각의 정의는 아래와 같다.
+heap은 min heap과 max heap으로 나누어져 있다. 각각의 정의는 아래와 같다.
 
 - min heap: 부모 노드의 값 < 자식 노드의 값 트리 형태의 자료구조
 - max heap: 부모 노드의 값 > 자식 노드의 값 트리 형태의 자료구조

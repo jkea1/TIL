@@ -13,26 +13,19 @@ def dijkstra(graph, start_v, dest, n):
   pq = [(0, start_v)]
 
   while pq:
-    print("초기 확인", distances, pq)
-
     cur_dist, cur_v = heappop(pq) # 자동으로 cost값이 낮은 순으로 정렬된다. 
-    print("heappop값 확인", cur_dist, cur_v)
     # 만약 현재 distances cost 값이 여전히 더 작다면 다시 갱신 할 필요 없다.   
     if distances[cur_v] < cur_dist:
-      print("if문 확인", distances[cur_v], cur_dist)
       continue
 
     # cur_dist 보다 
     for next_v, cost in graph[cur_v]: # 인접한 노드
-      print("for문 check", next_v, cost)
       next_dist = distances[cur_v] + cost
 
       if next_dist < distances[next_v]:
-        print("for문 안 if문 dist 확인", next_dist, distances[next_v])
         distances[next_v] = next_dist
         heappush(pq, (next_dist, next_v))
 
-  print("distance 최종 check", distances)
   return distances[dest]
 
 # 인접 리스트 
