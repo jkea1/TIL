@@ -10,3 +10,8 @@ dictionary = {
 }
 
 print(d["ea"])
+
+jobs = [[9, 3], [1, 9], [2, 6]]
+jobs.sort()
+
+print("직업", jobs)
