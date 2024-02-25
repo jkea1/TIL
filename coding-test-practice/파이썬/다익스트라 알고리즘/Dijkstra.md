@@ -84,3 +84,9 @@ graph = {
 가장 짧은 경로로 1에서 8로 가려고 한다. 최단 경로를 찾아라.
 
 <img src="./image/Screenshot 2024-02-08 at 7.25.28 PM.png" />
+
+### 코딩테스트 문제
+
+[KAKAO\_합승 택시 요금](https://school.programmers.co.kr/learn/courses/30/lessons/72413)
+
+- 다익스트라 알고리즘 사용할때는, 하나의 시작 노드와 하나의 도착 노드가 기준이다.
