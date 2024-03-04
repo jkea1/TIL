@@ -17,7 +17,7 @@ JS 엔진은 **Execution Context(실행 컨텍스트)** 를 객체로 관리하�
 
 <br/>
 
-### Execution Context의 관리: CallStack(호출 스택)
+#### Execution Context의 관리: CallStack(호출 스택)
 
 JS 엔진은 생성된 Execution Context를 관리하는 목적의 Call Stack(호출 스택)을 갖고 있다. JS는 단일 스레드 형식이기 때문에 <u>런타임</u>에 단 하나의 Call Stack이 존재한다.
 
@@ -44,9 +44,9 @@ JS 엔진은 전역 범위의 코드를 실행하며 Global Execution Context를
 
   <br />
 
-### Execution Context(실행 컨텍스트)의 구성
+#### Execution Context(실행 컨텍스트)의 구성
 
-<code>Execution Context = Lexical Environment+ Variable Environment</code>
+#### **📌 Execution Context = Lexical Environment + Variable Environment**
 
     ExecutionContext:{
         LexicalEnvironment:{
@@ -61,9 +61,11 @@ JS 엔진은 전역 범위의 코드를 실행하며 Global Execution Context를
 
 Lexical Environment과 Variable Environment 모두 공통적으로 <code>Reference to the outer environment 외부 환경에 대한 참조</code>와 <code>Environment Records</code>를 받는다.
 
+<br>
+
 ##### 1. 외부 환경 참조
 
-> 외부 환경 참조는 lexical scope(정적 스코프)를 기준으로 상위 scope의 Lexical Environment를 참조한다. 각 참조는 단방향 Linked List의 형태로 구현되어 있다.
+> 외부 환경 참조는 lexical scope (정적 스코프)를 기준으로 상위 scope의 Lexical Environment를 참조한다. 각 참조는 단방향 Linked List의 형태로 구현되어 있다.
 
 - <code>Global Execution Context</code> 의 경우
 
