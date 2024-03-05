@@ -75,11 +75,13 @@ Lexical Environment과 Variable Environment 모두 공통적으로 <code>Referen
 
   - Functional Execution Context는 상위 Scope에 해당하는 Lexical Environment를 외부 환경 참조 값으로 갖는다.
 
-  - 다음으로 함수가 실행되면 Global Execution Context의 위로 Functional Execution를 Context stack을 push하는데, 이때 Functional Execution Context는 상위 Scope에 해당하는 Lexical Environment를 외부 환경 참조 값으로 갖는다. 이 연결 고리는 변수 탐색 시 사용된다.
+  - 다음으로 함수가 실행되면 Global Execution Context 위로 Functional Execution를 Context stack으로 push하는데, 이때 Functional Execution Context는 상위 Scope에 해당하는 Lexical Environment를 외부 환경 참조 값으로 갖는다. 이 연결 고리는 변수 탐색 시 사용된다.
+
+    <img src="./img/Screenshot 2024-03-03 at 9.00.03 PM.png" />
 
 ##### 2. Environment Record
 
-Environment Record는 Lexical Environment 내에 식별자 바인딩을 기록하는 객체이다. Environment Record를 상속하는 세개의 서브 클래스로 구성되어 있다.
+Environment Record는 **Lexical Environment 내에 식별자 바인딩을 기록하는 객체**이다. Environment Record를 상속하는 세개의 서브 클래스로 구성되어 있다.
 
     Environment Record: {
       Declarative Environment Record,
@@ -114,3 +116,8 @@ Environment Record는 Lexical Environment 내에 식별자 바인딩을 기록�
 #### 실행 컨텍스트 생성 과정과 Hoisting
 
 [참고 할 만한 블로그 글](https://dkje.github.io/2020/08/30/ExecutionContext/#context%EC%9D%98-%EC%83%9D%EC%84%B1-%EA%B3%BC%EC%A0%95)
+
+##### 참고 자료
+
+[자바스크립트의 스코프와 클로저](https://meetup.nhncloud.com/posts/86)
+[Execution Context(실행 컨텍스트)란?](https://dkje.github.io/2020/08/30/ExecutionContext/#context%EC%9D%98-%EC%83%9D%EC%84%B1-%EA%B3%BC%EC%A0%95)
