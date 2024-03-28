@@ -1,17 +1,16 @@
-from collections import defaultdict 
+# print(format(100000, '!>020,.4f'))
 
-d = defaultdict(list)
-print(d['a'])
+# def tmpFunction(value):
+# 	if value % 2 == 0:
+# 		return value
+# 	else:
+# 		return None
 
-dictionary = {
-    "apple": "사과",
-    "banana": "바나나",
-    "cherry": "체리"
-}
+# print(list(map(tmpFunction, range(20))))
 
-print(d["ea"])
+# print(list(zip(['a', 'b', 'c', 'd'], [1,2,3,4], [10, 20, 30, 40], 'ABCD')))
 
-jobs = [[9, 3], [1, 9], [2, 6]]
-jobs.sort()
+# s = "12.34.56.78.90"
+# tmp = s.split(".", 2)
 
-print("직업", jobs)
+# print("s", tmp)
