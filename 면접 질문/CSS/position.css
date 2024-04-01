@@ -1,0 +1,61 @@
+span,
+div {
+  background: skyblue;
+  border: 2px solid black;
+  padding: 4px;
+}
+
+.parent {
+  top: 20px;
+  right: -20px;
+  margin-bottom: 30px;
+  position: relative;
+  background: grey;
+  width: 400px;
+  height: 100px;
+  font-size: 20px;
+}
+
+.standard {
+  font-size: 15px;
+}
+
+.top {
+  position: relative;
+  top: 5px;
+  z-index: 1;
+  font-size: 15px;
+}
+
+.right {
+  position: relative;
+  right: 5px;
+  font-size: 15px;
+}
+
+.bottom {
+  position: relative;
+  bottom: 5px;
+  font-size: 15px;
+}
+
+.left {
+  position: relative;
+  left: 5px;
+  font-size: 15px;
+}
+
+.absolute {
+  position: absolute;
+  left: 20px;
+  font-size: 13px;
+  /* opacity: 0.4; */
+  text-align: right;
+  border-color: red;
+}
+
+.absolute-standard {
+  position: absolute;
+  font-size: 13px;
+  width: 120px;
+}
