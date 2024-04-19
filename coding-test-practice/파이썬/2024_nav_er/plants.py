@@ -1,3 +1,5 @@
+# 한 case 당 10ms 제한시간 있다.
+
 def solution(plants, watered):
   answer = [] 
   deadPlant = set()

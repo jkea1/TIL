@@ -30,12 +30,20 @@ heap = []
 
 이미 존재하는 리스트를 heap으로 만들고 싶으면 <code>heapify</code>를 사용합니다.
 
+> 힙 형태로 바뀐다는 뜻이다.
+>
+> 데이터를 자료구조에 넣고 뺄때, Heap의 성질을 유지하게 만들기 위한 작업이자 비용이다. O(logN)이 걸린다.
+>
+> 즉, 최댓값 혹은 최솟값을 언제든지 쉽게 뽑아갈 수 있도록 적합한 형태로 트리에 데이터들을 잘 배치해 놓겠다는 의미이다.
+
 ```
 from heapq import heapify
 
 a = [3, 5, 2, 1, 6, 4]
 heapify(a)
 ```
+
+- https://velog.io/@ksi05503/heap%EA%B3%BCheapify
 
 ### heapq.heappush() - heap의 원소 추가
 
