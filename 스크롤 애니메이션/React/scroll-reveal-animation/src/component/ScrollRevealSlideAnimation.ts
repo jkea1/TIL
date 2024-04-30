@@ -64,11 +64,11 @@ function ScrollRevealSlideAnimation({
     setIsInViewPort(checkIsInViewport(elemRef?.current))
   })
 
-  return (
-    <Wrapper ref={elemRef} isInViewPort={isInViewPort} direction={direction}>
-      {children}
-    </Wrapper>
-  )
+  // return (
+  //   <Wrapper ref={elemRef} isInViewPort={isInViewPort} direction={direction}>
+  //     {children}
+  //   </Wrapper>
+  // )
 }
 
 export default ScrollRevealSlideAnimation
