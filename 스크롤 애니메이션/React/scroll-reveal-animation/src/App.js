@@ -10,7 +10,6 @@ const goup = keyframes`
   to { transform: translateY(0); opacity: 1; }
 `
 
-// 이거 챗지피티로 확인해 보기
 const Container = styled.div`
   animation: ${({ animation }) => animation && goup} 2s ease-out;
 `
