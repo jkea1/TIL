@@ -1,0 +1,13 @@
+{
+  "name": "stars-mission",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "start:watch": "node --watch src/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
