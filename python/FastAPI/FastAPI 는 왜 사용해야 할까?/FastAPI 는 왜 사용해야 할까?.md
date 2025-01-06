@@ -14,3 +14,6 @@ FastAPI가 장고나 플라스크보다 2배 빠른데 코드는 더 간결하�
 js를 이용한 express랑 비슷한 성능을 낸다.
 
 <img src='./Screenshot 2025-01-04 at 9.43.58 PM.png'>
+
+FastAPI는 API 만드는 툴 느낌이다.
+
