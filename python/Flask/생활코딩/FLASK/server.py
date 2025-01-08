@@ -3,6 +3,7 @@ import random
 
 # Flask 애플리케이션 객체 생성, name은 모듈의 이름을 나타내며 파일명이 이에 해당하게 된다.
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 # [] -> list
 # {} -> dictionary
@@ -22,7 +23,15 @@ topics = [
 
 # HTML 코드들은 나중에 Next.js 코드로 빠진다.
 # 지금은 기본 GET 요청이므로 응답으로 HTML을 주는식으로 화면을 구성한거다.
-def template(contents, content):
+def template(contents, content, id=None):
+  contextUI = ''
+
+  if id != None:
+    contextUI = f'''
+      <li><a href='/update/{id}/'>update</a></li>
+      <li><form action="/delete/{id}/" method="POST"><input type="submit" value="delete"></form></li>
+    '''
+
   return f'''<!doctype html>
   <html>
     <body>
@@ -32,7 +41,8 @@ def template(contents, content):
       </ol>
       {content}
       <ul>
-        <li><a href="/create">create</a></li>
+        <li><a href="/create/">create</a></li>
+        {contextUI}
       </ul>
     </body>
   </html>
@@ -43,7 +53,7 @@ def getContents():
 
   # index 이용하고 싶을 때는 enumerate 사용
   for topic in topics:
-    liTags += f'<li><a href="/read/{topic["id"]}">{topic["title"]}</a></li>'
+    liTags += f'<li><a href="/read/{topic["id"]}/">{topic["title"]}</a></li>'
 
   return liTags
 
@@ -68,13 +78,13 @@ def read(id):
   
   print(title, body)
 
-  return template(getContents(), f'<h2>{title}</h2>{body}')
+  return template(getContents(), f'<h2>{title}</h2>{body}', id)
 
 @app.route('/create/', methods=['GET', 'POST'])
 def create():
   if request.method == 'GET':
     content = '''
-      <form action="/create" method="POST">
+      <form action="/create/" method="POST">
         <p><input type='text' name="title" placeholder="title" /></p>
         <p><textarea name="body" placeholder="body"></textarea></p>
         <p><input type="submit" value="create"></p>
@@ -94,6 +104,53 @@ def create():
 
     return redirect(url)
 
+@app.route('/update/<int:id>/', methods=['GET', 'POST'])
+def update(id):
+  if request.method == 'GET':
+    title = ''
+    body = ''
+
+    for topic in topics:
+      if id == topic['id']:
+        title = topic['title']
+        body = topic['body']
+        break
+
+    content = f'''
+      <form action="/update/{id}/" method="POST">
+        <p><input type='text' name="title" placeholder="title" value={title}></p>
+        <p><textarea name="body" placeholder="body">{body}</textarea></p>
+        <p><input type="submit" value="update"></p>
+      </form>
+    '''
+    
+    return template(getContents(), content)
+  elif request.method == 'POST':
+    title = request.form['title']
+    body = request.form['body']
+
+    print(title, body)
+    
+    for topic in topics:
+      if id == topic['id']:
+        topic['title'] = title
+        topic['body'] = body
+        break
+
+    url = '/read/' + str(id) + '/'
+
+    print(url)
+
+    return redirect(url)
+
+@app.route('/delete/<int:id>/', methods=['POST'])
+def delete(id):
+  for topic in topics:
+    if id == topic['id']:
+      topics.remove(topic)
+      break
+
+  return redirect('/')
 
 app.run(debug=True)
 # 실제 서비스를 상용화 할때는 debug=False 해야 한다.
